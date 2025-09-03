@@ -35,8 +35,20 @@ const Header = () => {
           <a href="/researchers" className="text-foreground/80 hover:text-foreground transition-colors">
             Researchers
           </a>
+          <a href="/community" className="text-foreground/80 hover:text-foreground transition-colors">
+            Community
+          </a>
+          <a href="/messages" className="text-foreground/80 hover:text-foreground transition-colors">
+            Messages
+          </a>
+          <a href="/profile" className="text-foreground/80 hover:text-foreground transition-colors">
+            Profile
+          </a>
           <a href="/about" className="text-foreground/80 hover:text-foreground transition-colors">
             About
+          </a>
+          <a href="/auth" className="text-foreground/80 hover:text-foreground transition-colors">
+            Sign In
           </a>
         </div>
       </nav>
