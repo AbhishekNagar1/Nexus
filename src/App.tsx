@@ -10,7 +10,16 @@ import Community from "./pages/Community";
 import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
-import Authentication from "./pages/Authentication";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import ResearchPositions from "./pages/ResearchPositions";
+import PhDPrograms from "./pages/PhDPrograms";
+import Fellowships from "./pages/Fellowships";
+import Internships from "./pages/Internships";
+import AcademicJobs from "./pages/AcademicJobs";
+import Mentorship from "./pages/Mentorship";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
@@ -31,7 +40,16 @@ const App = () => (
           <Route path="/messages" element={<Messages />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />
-          <Route path="/auth" element={<Authentication />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/research-positions" element={<ResearchPositions />} />
+          <Route path="/phd-programs" element={<PhDPrograms />} />
+          <Route path="/fellowships" element={<Fellowships />} />
+          <Route path="/internships" element={<Internships />} />
+          <Route path="/academic-jobs" element={<AcademicJobs />} />
+          <Route path="/mentorship" element={<Mentorship />} />
           <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

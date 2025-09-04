@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ProfessionalFooter from "@/components/ProfessionalFooter";
 import FloatingSignIn from "@/components/FloatingSignIn";
 import Beams from "@/components/Beams";
 
@@ -81,8 +81,8 @@ const Index = () => {
         {/* Hero Content */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <div className="animate-fade-in-up">
-            <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-black text-foreground mb-8 leading-[0.8] text-center">
-              <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+            <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-black text-foreground mb-8 leading-[0.8] text-center w-full">
+              <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent block text-center">
                 Connecting Minds
               </span>
             </h1>
@@ -215,7 +215,7 @@ const Index = () => {
       </section>
       
       {/* Footer */}
-      <Footer />
+      <ProfessionalFooter />
     </div>
   );
 };
