@@ -1,11 +1,13 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingSignIn from "@/components/FloatingSignIn";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <FloatingSignIn />
       
       <main className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">

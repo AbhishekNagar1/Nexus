@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingSignIn from "@/components/FloatingSignIn";
 import ApplicationForm from "@/components/ApplicationForm";
 
 const opportunities = [
@@ -58,6 +59,7 @@ const Opportunities = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <FloatingSignIn />
       
       <main className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
