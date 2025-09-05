@@ -23,6 +23,8 @@ import Mentorship from "./pages/Mentorship";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
+import EditProfile from "./pages/EditProfile";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,7 @@ const App = () => (
           <Route path="/messages" element={<Messages />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />
+          <Route path="/auth" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -52,6 +55,8 @@ const App = () => (
           <Route path="/mentorship" element={<Mentorship />} />
           <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
