@@ -79,10 +79,10 @@ const Index = () => {
         </div>
         
         {/* Hero Content */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-          <div className="animate-fade-in-up">
-            <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-black text-foreground mb-8 leading-[0.8] text-center w-full">
-              <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent block text-center">
+        <div className="relative z-50 text-center max-w-4xl mx-auto px-6">
+          <div>
+            <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-black mb-8 leading-[0.8] w-full flex items-center justify-center">
+              <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent relative z-50 text-center mx-auto">
                 Connecting Minds
               </span>
             </h1>
