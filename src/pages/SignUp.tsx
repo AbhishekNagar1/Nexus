@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,9 +9,13 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff, Github, Chrome } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import ForgotPasswordDialog from "@/components/ForgotPasswordDialog";
 import authImage from "@/assets/auth-illustration.jpg";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showSignInPassword, setShowSignInPassword] = useState(false);
@@ -30,6 +35,13 @@ const SignUp = () => {
     password: "demo123"
   });
 
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
+
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
     if (!signUpData.acceptTerms) {
@@ -37,15 +49,15 @@ const SignUp = () => {
       return;
     }
     console.log("Sign up:", signUpData);
-    // Simulate successful signup
-    alert("Account created successfully!");
+    login();
+    navigate('/');
   };
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Sign in:", signInData);
-    // Simulate successful login
-    alert("Signed in successfully!");
+    login();
+    navigate('/');
   };
 
   return (
@@ -56,7 +68,8 @@ const SignUp = () => {
         <img 
           src={authImage}
           alt="Research collaboration illustration" 
-          className="w-full h-full object-cover"
+          className="w-full h-screen object-cover"
+          style={{ height: '100vh' }}
         />
         <div className="absolute inset-0 z-20 flex items-center justify-center p-12">
           <div className="text-center text-white">
@@ -67,7 +80,7 @@ const SignUp = () => {
       </div>
 
       {/* Right Half - Authentication Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-background">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-background min-h-screen">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-bold text-foreground">ResearchNet</h1>
@@ -308,9 +321,11 @@ const SignUp = () => {
                           Remember me
                         </label>
                       </div>
-                      <a href="/forgot-password" className="text-sm text-primary hover:underline">
-                        Forgot password?
-                      </a>
+                       <ForgotPasswordDialog>
+                         <button type="button" className="text-sm text-primary hover:underline">
+                           Forgot password?
+                         </button>
+                       </ForgotPasswordDialog>
                     </div>
 
                     <Button type="submit" className="w-full">

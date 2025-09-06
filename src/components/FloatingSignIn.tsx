@@ -1,11 +1,10 @@
 import { LogIn } from "lucide-react";
-import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 const FloatingSignIn = () => {
-  // TODO: Replace with actual auth state
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const { isAuthenticated } = useAuth();
 
-  if (isSignedIn) return null;
+  if (isAuthenticated) return null;
 
   return (
     <div className="fixed top-6 right-6 z-50">

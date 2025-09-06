@@ -1,9 +1,10 @@
 import { User, MessageSquare } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import UserDropdown from "@/components/UserDropdown";
 
 const Header = () => {
-  // TODO: Replace with actual auth state
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   return (
     <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
@@ -40,18 +41,17 @@ const Header = () => {
             Community
           </a>
           
-          {isSignedIn && (
+          {isAuthenticated && (
             <>
               <a href="/messages" className="text-foreground/80 hover:text-foreground transition-colors p-2 rounded-full hover:bg-white/10">
                 <MessageSquare size={20} />
-              </a>
-              <a href="/profile" className="text-foreground/80 hover:text-foreground transition-colors p-2 rounded-full hover:bg-white/10">
-                <User size={20} />
               </a>
             </>
           )}
         </div>
       </nav>
+      
+      {isAuthenticated && <UserDropdown />}
     </header>
   );
 };

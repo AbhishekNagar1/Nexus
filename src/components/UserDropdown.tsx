@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { User, Settings, MessageCircle, Edit, ChevronDown } from "lucide-react";
+import { User, Settings, MessageCircle, Edit, ChevronDown, LogOut } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,12 +11,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const UserDropdown = () => {
-  // Mock user data - replace with actual auth state
+  const { user: authUser, logout } = useAuth();
+  
+  if (!authUser) return null;
+  
   const user = {
-    name: "John Doe",
-    email: "john@university.edu",
+    name: `${authUser.user_metadata?.first_name || 'John'} ${authUser.user_metadata?.last_name || 'Doe'}`,
+    email: authUser.email || "john@university.edu",
     avatar: "/placeholder.svg",
-    initials: "JD"
+    initials: `${authUser.user_metadata?.first_name?.[0] || 'J'}${authUser.user_metadata?.last_name?.[0] || 'D'}`
   };
 
   return (
@@ -68,6 +72,13 @@ const UserDropdown = () => {
               <Settings size={16} />
               Settings
             </a>
+          </DropdownMenuItem>
+          
+          <DropdownMenuSeparator className="border-white/10" />
+          
+          <DropdownMenuItem onClick={logout} className="flex items-center gap-2 cursor-pointer text-destructive">
+            <LogOut size={16} />
+            Sign Out
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
