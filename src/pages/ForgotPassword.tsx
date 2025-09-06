@@ -17,7 +17,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Layout showFloatingSignIn={false}>
+    <Layout>
       <div className="min-h-screen flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-md">
           <Card className="glass border-white/10">

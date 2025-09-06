@@ -7,7 +7,7 @@ const Header = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+    <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[100]">
       <nav className="glass px-8 py-4 rounded-full flex items-center gap-8">
         <a href="/" className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">

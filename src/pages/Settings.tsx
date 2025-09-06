@@ -24,7 +24,7 @@ const Settings = () => {
   });
 
   return (
-    <Layout showFloatingSignIn={false}>
+    <Layout>
       <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/10 py-12">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="space-y-6">

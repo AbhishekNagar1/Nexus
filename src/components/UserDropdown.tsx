@@ -23,7 +23,7 @@ const UserDropdown = () => {
   };
 
   return (
-    <div className="fixed top-6 right-6 z-50">
+    <div className="fixed top-6 right-6 z-[60]">
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-2 glass p-2 rounded-full hover:bg-white/10 transition-colors group outline-none">
           <Avatar className="h-8 w-8">

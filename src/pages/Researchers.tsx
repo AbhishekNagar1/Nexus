@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import ProfessionalFooter from "@/components/ProfessionalFooter";
-import FloatingSignIn from "@/components/FloatingSignIn";
+
 
 const researchers = [
   {
@@ -45,7 +45,6 @@ const Researchers = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <FloatingSignIn />
       
       <main className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
