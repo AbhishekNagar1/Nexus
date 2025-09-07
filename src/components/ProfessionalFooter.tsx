@@ -46,7 +46,7 @@ const ProfessionalFooter = () => {
               <img 
                 src={NexusLogo} 
                 alt="Nexus Logo" 
-                className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                className="w-10 h-10 sm:w-12 sm:h-12 object-contain no-select"
               />
               <span className="text-xl sm:text-2xl font-bold text-foreground">Nexus</span>
             </div>

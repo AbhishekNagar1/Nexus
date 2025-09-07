@@ -66,6 +66,33 @@ All colors MUST be HSL.
     overflow-x: hidden;
   }
 
+  /* Image protection - Prevent dragging and right-click copying */
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Re-enable hover effects for interactive images */
+  img:hover {
+    pointer-events: auto;
+  }
+
+  /* Prevent text selection on logos and important content */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
   /* Glass morphism utilities */
   .glass {
     @apply backdrop-blur-xl border border-white/10;

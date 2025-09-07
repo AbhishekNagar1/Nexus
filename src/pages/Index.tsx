@@ -212,11 +212,11 @@ const Index = () => {
               {/* First set of logos */}
               <div className="flex space-x-8 sm:space-x-12 md:space-x-16 lg:space-x-20 shrink-0">
                 {universityLogos.map((university, index) => (
-                  <div key={`first-${index}`} className="flex items-center justify-center p-3 sm:p-4 glass rounded-xl hover:bg-white/5 transition-all duration-300 group min-w-[80px] sm:min-w-[100px]">
+                  <div key={`first-${index}`} className="flex items-center justify-center min-w-[80px] sm:min-w-[100px] hover:scale-105 transition-transform duration-300">
                     <img 
                       src={university.logo} 
                       alt={university.name}
-                      className="h-8 sm:h-12 md:h-16 lg:h-20 w-auto object-contain filter brightness-75 group-hover:brightness-100 transition-all duration-300"
+                      className="h-12 sm:h-16 md:h-16 lg:h-20 w-auto object-contain filter brightness-75 hover:brightness-100 transition-all duration-300 no-select"
                     />
                   </div>
                 ))}
@@ -224,11 +224,11 @@ const Index = () => {
               {/* Duplicate set for seamless scrolling */}
               <div className="flex space-x-8 sm:space-x-12 md:space-x-16 lg:space-x-20 shrink-0">
                 {universityLogos.map((university, index) => (
-                  <div key={`second-${index}`} className="flex items-center justify-center p-3 sm:p-4 glass rounded-xl hover:bg-white/5 transition-all duration-300 group min-w-[80px] sm:min-w-[100px]">
+                  <div key={`second-${index}`} className="flex items-center justify-center min-w-[80px] sm:min-w-[100px] hover:scale-105 transition-transform duration-300">
                     <img 
                       src={university.logo} 
                       alt={university.name}
-                      className="h-8 sm:h-12 md:h-16 lg:h-20 w-auto object-contain filter brightness-75 group-hover:brightness-100 transition-all duration-300"
+                      className="h-12 sm:h-16 md:h-16 lg:h-20 w-auto object-contain filter brightness-75 hover:brightness-100 transition-all duration-300 no-select"
                     />
                   </div>
                 ))}
