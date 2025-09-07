@@ -5,13 +5,32 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { ArrowLeft, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email.trim()) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address to reset your password.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    toast({
+      title: "Coming Soon! 📧",
+      description: "Password reset functionality is currently in development. This feature will be available soon!",
+      duration: 4000,
+    });
+    
     console.log("Reset password for:", email);
     setIsSubmitted(true);
   };

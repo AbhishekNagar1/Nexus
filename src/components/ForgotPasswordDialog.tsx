@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 
 interface ForgotPasswordDialogProps {
   children: React.ReactNode;
@@ -18,9 +19,27 @@ interface ForgotPasswordDialogProps {
 const ForgotPasswordDialog = ({ children }: ForgotPasswordDialogProps) => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email.trim()) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address for password recovery.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    toast({
+      title: "Coming Soon! 📧",
+      description: "Password reset functionality is currently in development. This feature will be available soon!",
+      duration: 4000,
+    });
+    
     console.log("Reset password for:", email);
     setIsSubmitted(true);
   };

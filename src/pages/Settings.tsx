@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import Layout from "@/components/Layout";
 import { Bell, Shield, Eye, Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Settings = () => {
   const [notifications, setNotifications] = useState({
@@ -22,6 +23,48 @@ const Settings = () => {
     showInstitution: true,
     allowMessages: true
   });
+  
+  const { toast } = useToast();
+  
+  const handleSaveSettings = () => {
+    toast({
+      title: "Coming Soon! ⚙️",
+      description: "Settings save functionality is currently in development. Your preferences will be available when the feature goes live!",
+      duration: 4000,
+    });
+  };
+  
+  const handleChangePassword = () => {
+    toast({
+      title: "Coming Soon! 🔒",
+      description: "Password change functionality is currently in development. Please check back soon!",
+      duration: 3000,
+    });
+  };
+  
+  const handleEnable2FA = () => {
+    toast({
+      title: "Coming Soon! 🔐",
+      description: "Two-factor authentication setup is currently in development. Enhanced security features coming soon!",
+      duration: 4000,
+    });
+  };
+  
+  const handleConnectAccount = (platform: string) => {
+    toast({
+      title: "Coming Soon! 🔗",
+      description: `${platform} account integration is currently in development. Social login features coming soon!`,
+      duration: 3000,
+    });
+  };
+  
+  const handleDeleteAccount = () => {
+    toast({
+      title: "Coming Soon! ⚠️",
+      description: "Account deletion functionality is currently in development. Contact support for account management assistance.",
+      duration: 4000,
+    });
+  };
 
   return (
     <Layout>
@@ -150,21 +193,21 @@ const Settings = () => {
                 <div className="space-y-2">
                   <h4 className="font-medium">Password</h4>
                   <p className="text-sm text-foreground/70">Last changed 30 days ago</p>
-                  <Button variant="outline" size="sm">Change Password</Button>
+                  <Button variant="outline" size="sm" onClick={handleChangePassword}>Change Password</Button>
                 </div>
                 <Separator />
                 <div className="space-y-2">
                   <h4 className="font-medium">Two-Factor Authentication</h4>
                   <p className="text-sm text-foreground/70">Add an extra layer of security</p>
-                  <Button variant="outline" size="sm">Enable 2FA</Button>
+                  <Button variant="outline" size="sm" onClick={handleEnable2FA}>Enable 2FA</Button>
                 </div>
                 <Separator />
                 <div className="space-y-2">
                   <h4 className="font-medium">Connected Accounts</h4>
                   <p className="text-sm text-foreground/70">Manage your connected social accounts</p>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm">Connect Google</Button>
-                    <Button variant="outline" size="sm">Connect GitHub</Button>
+                    <Button variant="outline" size="sm" onClick={() => handleConnectAccount('Google')}>Connect Google</Button>
+                    <Button variant="outline" size="sm" onClick={() => handleConnectAccount('GitHub')}>Connect GitHub</Button>
                   </div>
                 </div>
               </CardContent>
@@ -187,13 +230,13 @@ const Settings = () => {
                   <p className="text-sm text-foreground/70">
                     Permanently delete your account and all associated data. This action cannot be undone.
                   </p>
-                  <Button variant="destructive" size="sm">Delete Account</Button>
+                  <Button variant="destructive" size="sm" onClick={handleDeleteAccount}>Delete Account</Button>
                 </div>
               </CardContent>
             </Card>
 
             <div className="flex justify-center pt-6">
-              <Button>Save All Changes</Button>
+              <Button onClick={handleSaveSettings}>Save All Changes</Button>
             </div>
           </div>
         </div>

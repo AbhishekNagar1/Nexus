@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 
 interface ApplicationFormProps {
   opportunity: any;
@@ -23,10 +24,30 @@ const ApplicationForm = ({ opportunity, onClose }: ApplicationFormProps) => {
     coverLetter: "",
     cv: null as File | null
   });
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    
+    // Validate required fields
+    if (!formData.fullName || !formData.email || !formData.university || !formData.degree || !formData.coverLetter || !formData.cv) {
+      toast({
+        title: "Missing Required Fields",
+        description: "Please fill in all required fields marked with *",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    // Show coming soon toast
+    toast({
+      title: "Coming Soon! 📝",
+      description: "Application submission system is currently in development. Your application data has been saved locally for when the feature goes live!",
+      duration: 5000,
+    });
+    
+    // Handle form submission (currently in development)
     console.log("Application submitted:", formData);
     onClose();
   };

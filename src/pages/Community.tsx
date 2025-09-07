@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
-import ProfessionalFooter from "@/components/ProfessionalFooter";  
+import ProfessionalFooter from "@/components/ProfessionalFooter";
+import { useToast } from "@/hooks/use-toast";  
 
 
 const posts = [
@@ -57,11 +58,24 @@ const suggestions = [
 
 const Community = () => {
   const [newPost, setNewPost] = useState("");
+  const { toast } = useToast();
 
   const handlePost = () => {
     if (newPost.trim()) {
+      toast({
+        title: "Coming Soon! 📝",
+        description: "Community posting functionality is currently in development. Social features will be available soon!",
+        duration: 4000,
+      });
       console.log("New post:", newPost);
       setNewPost("");
+    } else {
+      toast({
+        title: "Empty Post",
+        description: "Please write something before sharing your post.",
+        variant: "destructive",
+        duration: 2000,
+      });
     }
   };
 

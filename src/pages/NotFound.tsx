@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertTriangle, Home, ArrowLeft, Search } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import ProfessionalFooter from "@/components/ProfessionalFooter";
 import AuthControls from "@/components/AuthControls";
 
 const NotFound = () => {
+  const { toast } = useToast();
+
   const handleGoHome = () => {
     window.location.href = '/';
   };
@@ -16,6 +19,14 @@ const NotFound = () => {
 
   const handleSearchOpportunities = () => {
     window.location.href = '/opportunities';
+  };
+
+  const handleContactSupport = () => {
+    toast({
+      title: "Coming Soon! 📞",
+      description: "Customer support system is currently in development. Please check back soon or contact us via email.",
+      duration: 4000,
+    });
   };
 
   return (
@@ -102,7 +113,7 @@ const NotFound = () => {
                 our support team is here to help you navigate the academic world.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button variant="default" className="px-6 py-3">
+                <Button variant="default" className="px-6 py-3" onClick={handleContactSupport}>
                   Contact Support
                 </Button>
                 <Button variant="outline" className="px-6 py-3" onClick={() => window.location.href = '/community'}>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Github, Mail } from "lucide-react";
 import Header from "@/components/Header";
 import ProfessionalFooter from "@/components/ProfessionalFooter";
 import Beams from "@/components/Beams";
@@ -29,6 +30,18 @@ const Index = () => {
   // Handle Explore Opportunities button click (redirect to opportunities page)
   const handleExploreOpportunities = () => {
     window.location.href = '/opportunities';
+  };
+
+  // Handle GitHub redirect
+  const handleGitHubClick = () => {
+    window.open('https://github.com/AbhishekNagar1/Nexus.git', '_blank');
+  };
+
+  // Handle Connect Me email
+  const handleConnectMe = () => {
+    const subject = encodeURIComponent('Nexus - Connection Request');
+    const body = encodeURIComponent('Hi Abhishek,\n\nI found your Nexus project and would like to connect with you.\n\nBest regards');
+    window.location.href = `mailto:abhisheknagar679@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const opportunities = [
@@ -102,7 +115,7 @@ const Index = () => {
       <AuthControls />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24">
         {/* Animated Background */}
         <div className="absolute inset-0 z-0">
           <Beams
@@ -147,6 +160,34 @@ const Index = () => {
               >
                 Explore Opportunities
               </Button>
+            </div>
+            
+            {/* Open Source Section */}
+            <div className="mt-8 flex flex-col items-center space-y-4">
+              <div className="glass rounded-lg px-4 py-3 sm:px-5 sm:py-3 max-w-sm mx-auto">
+                <div className="flex items-center justify-center gap-2 sm:gap-3">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-white/10 transition-colors h-8 w-8 sm:h-9 sm:w-9"
+                    onClick={handleGitHubClick}
+                  >
+                    <Github size={18} className="text-foreground sm:w-5 sm:h-5" />
+                  </Button>
+                  <div className="text-center">
+                    <p className="text-foreground/80 text-xs sm:text-sm leading-relaxed">
+                      This is <span className="font-semibold text-foreground">open source</span>! 
+                      For more info,{" "}
+                      <button 
+                        onClick={handleConnectMe}
+                        className="text-primary hover:text-primary/80 underline transition-colors font-medium"
+                      >
+                        connect with me
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,10 +1,40 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import NexusLogo from "@/assets/nexus_logo.svg";
 
 const ProfessionalFooter = () => {
+  const [email, setEmail] = useState("");
+  const { toast } = useToast();
+
+  const handleNewsletterSubscribe = () => {
+    if (email.trim()) {
+      toast({
+        title: "Coming Soon! 📧",
+        description: "Newsletter subscription feature is currently in development. We'll notify you when it's ready!",
+        duration: 4000,
+      });
+      setEmail("");
+    } else {
+      toast({
+        title: "Please enter your email",
+        description: "Enter a valid email address to subscribe to our newsletter.",
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
+  };
+
+  const handleSocialClick = (platform: string) => {
+    toast({
+      title: "Coming Soon! 🚀",
+      description: `${platform} integration is currently in development. Follow us soon!`,
+      duration: 3000,
+    });
+  };
   return (
     <footer className="bg-background border-t border-border mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
@@ -24,16 +54,16 @@ const ProfessionalFooter = () => {
               Connecting minds for academic excellence. The premier platform for researchers, students, and institutions worldwide.
             </p>
             <div className="flex flex-wrap gap-2 sm:gap-4">
-              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]" onClick={() => handleSocialClick('Facebook')}>
                 <Facebook size={18} />
               </Button>
-              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]" onClick={() => handleSocialClick('Twitter')}>
                 <Twitter size={18} />
               </Button>
-              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]" onClick={() => handleSocialClick('LinkedIn')}>
                 <Linkedin size={18} />
               </Button>
-              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]" onClick={() => handleSocialClick('YouTube')}>
                 <Youtube size={18} />
               </Button>
             </div>
@@ -97,8 +127,11 @@ const ProfessionalFooter = () => {
               <Input 
                 placeholder="Enter your email" 
                 className="bg-background border-border min-h-[44px]"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleNewsletterSubscribe()}
               />
-              <Button className="w-full min-h-[44px]">
+              <Button className="w-full min-h-[44px]" onClick={handleNewsletterSubscribe}>
                 Subscribe Now
               </Button>
             </div>

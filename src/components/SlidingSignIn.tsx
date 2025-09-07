@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Eye, EyeOff, Github, Chrome, X, UserPlus, Mail, CheckCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 
 interface SlidingSignInProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
   const [isRecoverySent, setIsRecoverySent] = useState(false);
   const [recoveryEmail, setRecoveryEmail] = useState("");
   const { login } = useAuth();
+  const { toast } = useToast();
   
   const [signInData, setSignInData] = useState({
     email: "",
@@ -38,6 +40,24 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!signInData.email || !signInData.password) {
+      toast({
+        title: "Missing Credentials",
+        description: "Please enter both email and password to sign in.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    toast({
+      title: "Coming Soon! 🔑",
+      description: "User authentication system is currently in development. Sign-in functionality will be available soon!",
+      duration: 4000,
+    });
+    
     console.log("Sign in:", signInData);
     login();
     onClose();
@@ -45,6 +65,23 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
 
   const handlePasswordRecovery = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!recoveryEmail) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address for password recovery.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    toast({
+      title: "Coming Soon! 📬",
+      description: "Password recovery system is currently in development. This feature will be available soon!",
+      duration: 4000,
+    });
+    
     console.log("Password recovery for:", recoveryEmail);
     // Here you would integrate with Supabase auth recovery
     setIsRecoverySent(true);
@@ -57,9 +94,35 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!signUpData.firstName || !signUpData.lastName || !signUpData.email || !signUpData.role || !signUpData.password) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields to create your account.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    toast({
+      title: "Coming Soon! 🎆",
+      description: "User registration system is currently in development. Account creation will be available soon!",
+      duration: 4000,
+    });
+    
     console.log("Sign up:", signUpData);
     login();
     onClose();
+  };
+  
+  const handleSocialAuth = (platform: string) => {
+    toast({
+      title: "Coming Soon! 🔗",
+      description: `${platform} authentication is currently in development. Social login features coming soon!`,
+      duration: 3000,
+    });
   };
 
   return (
@@ -104,11 +167,11 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
             <CardContent className="p-4 md:p-6 space-y-4 md:space-y-6">
               {/* Social Sign In */}
               <div className="space-y-3">
-                <Button variant="outline" className="w-full glass-button">
+                <Button variant="outline" className="w-full glass-button" onClick={() => handleSocialAuth('Google')}>
                   <Chrome className="mr-2 h-4 w-4" />
                   Continue with Google
                 </Button>
-                <Button variant="outline" className="w-full glass-button">
+                <Button variant="outline" className="w-full glass-button" onClick={() => handleSocialAuth('GitHub')}>
                   <Github className="mr-2 h-4 w-4" />
                   Continue with GitHub
                 </Button>

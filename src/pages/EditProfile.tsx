@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Layout from "@/components/Layout";
 import { Camera } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const EditProfile = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +21,33 @@ const EditProfile = () => {
     website: "https://johndoe.mit.edu",
     location: "Cambridge, MA"
   });
+  
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    toast({
+      title: "Coming Soon! 📝",
+      description: "Profile update functionality is currently in development. Your changes will be saved when the feature goes live!",
+      duration: 4000,
+    });
     console.log("Updated profile:", formData);
+  };
+  
+  const handleAvatarUpdate = () => {
+    toast({
+      title: "Coming Soon! 📷",
+      description: "Profile picture upload is currently in development. Photo management features coming soon!",
+      duration: 3000,
+    });
+  };
+  
+  const handleCancel = () => {
+    toast({
+      title: "Changes Discarded",
+      description: "Your profile changes have been discarded.",
+      duration: 2000,
+    });
   };
 
   return (
@@ -46,6 +70,7 @@ const EditProfile = () => {
                   <Button 
                     size="sm" 
                     className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full p-0"
+                    onClick={handleAvatarUpdate}
                   >
                     <Camera size={14} />
                   </Button>
@@ -153,7 +178,7 @@ const EditProfile = () => {
                   <Button type="submit" className="flex-1">
                     Save Changes
                   </Button>
-                  <Button type="button" variant="outline" className="flex-1">
+                  <Button type="button" variant="outline" className="flex-1" onClick={handleCancel}>
                     Cancel
                   </Button>
                 </div>

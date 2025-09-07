@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import ProfessionalFooter from "@/components/ProfessionalFooter";
+import { useToast } from "@/hooks/use-toast";
 
 const conversations = [
   {
@@ -60,11 +61,24 @@ const currentChat = [
 const Messages = () => {
   const [selectedConversation, setSelectedConversation] = useState(1);
   const [newMessage, setNewMessage] = useState("");
+  const { toast } = useToast();
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
+      toast({
+        title: "Coming Soon! 💬",
+        description: "Messaging functionality is currently in development. Chat features will be available soon!",
+        duration: 4000,
+      });
       console.log("Sending message:", newMessage);
       setNewMessage("");
+    } else {
+      toast({
+        title: "Empty Message",
+        description: "Please enter a message before sending.",
+        variant: "destructive",
+        duration: 2000,
+      });
     }
   };
 

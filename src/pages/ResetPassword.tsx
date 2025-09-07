@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/Layout";
 import { Eye, EyeOff, Lock } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,9 +14,47 @@ const ResetPassword = () => {
     password: "",
     confirmPassword: ""
   });
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.password || !formData.confirmPassword) {
+      toast({
+        title: "Missing Password",
+        description: "Please enter both password and confirmation password.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    if (formData.password !== formData.confirmPassword) {
+      toast({
+        title: "Passwords Don't Match",
+        description: "Please ensure both passwords match.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    if (formData.password.length < 8) {
+      toast({
+        title: "Password Too Short",
+        description: "Password must be at least 8 characters long.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    toast({
+      title: "Coming Soon! 🔐",
+      description: "Password reset functionality is currently in development. This feature will be available soon!",
+      duration: 4000,
+    });
+    
     console.log("Reset password:", formData);
   };
 
