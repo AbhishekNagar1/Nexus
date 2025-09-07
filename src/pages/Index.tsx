@@ -113,12 +113,12 @@ const Index = () => {
       </section>
 
       {/* Trusted by Section */}
-      <section className="py-16 px-6 relative z-10 bg-white">
+      <section className="py-12 md:py-16 lg:py-20 px-4 md:px-6 relative z-10">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2 md:mb-4">
             Trusted by ambitious students & professionals worldwide 🌍
           </h2>
-          <p className="text-lg text-gray-600 mb-12">
+          <p className="text-base md:text-lg text-foreground/70 mb-8 md:mb-12">
             Featuring top universities like Harvard, NUS, IITs, MIT, Oxford, Stanford.
           </p>
           

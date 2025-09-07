@@ -12,8 +12,6 @@ import Community from "./pages/Community";
 import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ResearchPositions from "./pages/ResearchPositions";
@@ -45,9 +43,6 @@ const App = () => (
           <Route path="/messages" element={<Messages />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />
-          <Route path="/auth" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/research-positions" element={<ResearchPositions />} />
