@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ProfessionalFooter from "@/components/ProfessionalFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const About = () => {
@@ -97,7 +97,7 @@ const About = () => {
         </div>
       </main>
 
-      <Footer />
+      <ProfessionalFooter />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ProfessionalFooter from "@/components/ProfessionalFooter";
 
 const conversations = [
   {
@@ -175,7 +175,7 @@ const Messages = () => {
         </div>
       </main>
 
-      <Footer />
+      <ProfessionalFooter />
     </div>
   );
 };

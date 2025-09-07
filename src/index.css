@@ -124,4 +124,64 @@ All colors MUST be HSL.
   .animate-scroll {
     animation: scroll 20s linear infinite;
   }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 640px) {
+    .animate-scroll {
+      animation: scroll 15s linear infinite; /* Faster scroll on mobile */
+    }
+    
+    /* Better touch targets for mobile */
+    button, a[role="button"], .clickable {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Improve text readability on mobile */
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1.2;
+      word-wrap: break-word;
+    }
+    
+    /* Reduce glass blur for better mobile performance */
+    .glass {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    
+    /* Better spacing for mobile */
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* Ensure dialogs appear above everything */
+  [data-radix-popper-content-wrapper],
+  [data-radix-dialog-overlay],
+  [data-radix-dialog-content] {
+    z-index: 9999 !important;
+  }
+
+  /* Line clamp utilities for better mobile text truncation */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
 }

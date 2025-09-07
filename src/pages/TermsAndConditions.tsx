@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ProfessionalFooter from "@/components/ProfessionalFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const TermsAndConditions = () => {
@@ -148,7 +148,7 @@ const TermsAndConditions = () => {
         </div>
       </main>
 
-      <Footer />
+      <ProfessionalFooter />
     </div>
   );
 };

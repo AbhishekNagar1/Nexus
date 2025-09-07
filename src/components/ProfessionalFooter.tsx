@@ -2,49 +2,38 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import NexusLogo from "@/assets/nexus_logo.svg";
 
 const ProfessionalFooter = () => {
   return (
     <footer className="bg-background border-t border-border mt-20">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                <svg 
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="text-background"
-                >
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                  <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
-                  <line x1="12" y1="22.08" x2="12" y2="12"/>
-                </svg>
-              </div>
-              <span className="text-2xl font-bold text-foreground">ResearchNet</span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <img 
+                src={NexusLogo} 
+                alt="Nexus Logo" 
+                className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+              />
+              <span className="text-xl sm:text-2xl font-bold text-foreground">Nexus</span>
             </div>
             <p className="text-foreground/70 text-sm leading-relaxed">
               Connecting minds for academic excellence. The premier platform for researchers, students, and institutions worldwide.
             </p>
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="icon">
+            <div className="flex flex-wrap gap-2 sm:gap-4">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
                 <Facebook size={18} />
               </Button>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
                 <Twitter size={18} />
               </Button>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
                 <Linkedin size={18} />
               </Button>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="min-h-[44px] min-w-[44px]">
                 <Youtube size={18} />
               </Button>
             </div>
@@ -52,14 +41,14 @@ const ProfessionalFooter = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
+            <h3 className="text-base sm:text-lg font-semibold text-foreground">Quick Links</h3>
             <ul className="space-y-2">
               {[
                 { name: "About Us", href: "/about" },
                 { name: "Opportunities", href: "/opportunities" },
                 { name: "Researchers", href: "/researchers" },
                 { name: "Community", href: "/community" },
-                { name: "Success Stories", href: "/success-stories" },
+                { name: "Success Stories", href: "/404" },
                 { name: "Help Center", href: "/help" }
               ].map((link) => (
                 <li key={link.name}>
@@ -76,7 +65,7 @@ const ProfessionalFooter = () => {
 
           {/* Services */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Services</h3>
+            <h3 className="text-base sm:text-lg font-semibold text-foreground">Services</h3>
             <ul className="space-y-2">
               {[
                 { name: "Research Positions", href: "/research-positions" },
@@ -100,30 +89,30 @@ const ProfessionalFooter = () => {
 
           {/* Newsletter */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Stay Updated</h3>
+            <h3 className="text-base sm:text-lg font-semibold text-foreground">Stay Updated</h3>
             <p className="text-foreground/70 text-sm">
               Subscribe to our newsletter for the latest opportunities and updates.
             </p>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <Input 
                 placeholder="Enter your email" 
-                className="bg-background border-border"
+                className="bg-background border-border min-h-[44px]"
               />
-              <Button className="w-full">
+              <Button className="w-full min-h-[44px]">
                 Subscribe Now
               </Button>
             </div>
-            <div className="space-y-2 pt-4">
-              <div className="flex items-center gap-2 text-sm text-foreground/70">
-                <Mail size={16} />
-                <span>contact@researchnet.com</span>
+            <div className="space-y-2 pt-2 sm:pt-4">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground/70">
+                <Mail size={14} className="sm:w-4 sm:h-4" />
+                <span className="break-all">contact@nexus.com</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-foreground/70">
-                <Phone size={16} />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground/70">
+                <Phone size={14} className="sm:w-4 sm:h-4" />
                 <span>+1 (555) 123-4567</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-foreground/70">
-                <MapPin size={16} />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground/70">
+                <MapPin size={14} className="sm:w-4 sm:h-4" />
                 <span>Boston, MA, USA</span>
               </div>
             </div>
@@ -133,11 +122,11 @@ const ProfessionalFooter = () => {
         <Separator />
 
         {/* Bottom Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center mt-8 space-y-4 md:space-y-0">
-          <div className="text-sm text-foreground/60">
-            © 2024 ResearchNet. All rights reserved.
+        <div className="flex flex-col md:flex-row justify-between items-center mt-6 sm:mt-8 space-y-4 md:space-y-0">
+          <div className="text-xs sm:text-sm text-foreground/60 text-center md:text-left">
+            © 2025 Nexus. All rights reserved.
           </div>
-          <div className="flex space-x-6 text-sm">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
             <a href="/privacy" className="text-foreground/60 hover:text-foreground transition-colors">
               Privacy Policy
             </a>

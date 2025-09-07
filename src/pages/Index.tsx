@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -5,8 +6,31 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Header from "@/components/Header";
 import ProfessionalFooter from "@/components/ProfessionalFooter";
 import Beams from "@/components/Beams";
+import AuthControls from "@/components/AuthControls";
+import SlidingSignIn from "@/components/SlidingSignIn";
+
+// Import university logos
+import HarvardLogo from "@/assets/Harvard University.svg";
+import MITLogo from "@/assets/MIT University.svg";
+import OxfordLogo from "@/assets/Oxford University.svg";
+import StanfordLogo from "@/assets/Stanford University.svg";
+import FloridaLogo from "@/assets/Florida University.svg";
+import NTLogo from "@/assets/NT University.svg";
+import USLogo from "@/assets/US University.svg";
 
 const Index = () => {
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+
+  // Handle Get Started button click (same as sign in)
+  const handleGetStarted = () => {
+    setIsSignInOpen(true);
+  };
+
+  // Handle Explore Opportunities button click (redirect to opportunities page)
+  const handleExploreOpportunities = () => {
+    window.location.href = '/opportunities';
+  };
+
   const opportunities = [
     { id: 1, title: "PhD in Quantum Computing", institution: "MIT", type: "PhD", deadline: "Mar 15" },
     { id: 2, title: "AI Research Assistant", institution: "Stanford", type: "RA", deadline: "Feb 28" },
@@ -16,6 +40,17 @@ const Index = () => {
     { id: 6, title: "Machine Learning Internship", institution: "Google AI", type: "Internship", deadline: "May 20" },
     { id: 7, title: "Neuroscience PostDoc", institution: "Yale", type: "PostDoc", deadline: "Jun 1" },
     { id: 8, title: "Robotics PhD Program", institution: "Carnegie Mellon", type: "PhD", deadline: "Apr 25" },
+  ];
+
+  // University logos data
+  const universityLogos = [
+    { name: "Harvard University", logo: HarvardLogo },
+    { name: "MIT", logo: MITLogo },
+    { name: "Oxford University", logo: OxfordLogo },
+    { name: "Stanford University", logo: StanfordLogo },
+    { name: "Florida University", logo: FloridaLogo },
+    { name: "NT University", logo: NTLogo },
+    { name: "US University", logo: USLogo },
   ];
 
   const testimonials = [
@@ -63,6 +98,9 @@ const Index = () => {
       {/* Header */}
       <Header />
       
+      {/* Auth Controls */}
+      <AuthControls />
+      
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Animated Background */}
@@ -80,30 +118,32 @@ const Index = () => {
         </div>
         
         {/* Hero Content */}
-        <div className="relative z-50 text-center max-w-4xl mx-auto px-6">
+        <div className="relative z-50 text-center max-w-4xl mx-auto px-4 md:px-6">
           <div>
-            <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-black mb-8 leading-[0.8] w-full flex items-center justify-center">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-black mb-6 md:mb-8 leading-[0.8] w-full flex items-center justify-center">
               <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent relative z-50 text-center mx-auto">
                 Connecting Minds
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-foreground/70 mb-12 max-w-2xl mx-auto leading-relaxed text-center">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-foreground/70 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed text-center px-4">
               The premier platform connecting professors, universities, and research institutes with talented students worldwide.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center px-4 max-w-md sm:max-w-none mx-auto">
               <Button 
                 variant="default" 
                 size="lg"
-                className="px-12 py-6 text-lg animate-glow"
+                className="px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg animate-glow w-full sm:w-auto min-h-[44px]"
+                onClick={handleGetStarted}
               >
                 Get Started
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                className="px-12 py-6 text-lg glass-button"
+                className="px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg glass-button w-full sm:w-auto min-h-[44px]"
+                onClick={handleExploreOpportunities}
               >
                 Explore Opportunities
               </Button>
@@ -113,34 +153,44 @@ const Index = () => {
       </section>
 
       {/* Trusted by Section */}
-      <section className="py-16 px-6 relative z-10 bg-white">
+      <section className="py-12 md:py-16 px-4 md:px-6 relative z-10 bg-background border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-            Trusted by ambitious students & professionals worldwide 🌍
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            Trusted by ambitious students & professionals worldwide
           </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Featuring top universities like Harvard, NUS, IITs, MIT, Oxford, Stanford.
+          <p className="text-sm sm:text-base md:text-lg text-foreground/70 mb-8 md:mb-12">
+            Featuring top universities like Harvard, MIT, Oxford, Stanford & more.
           </p>
           
-          <div className="overflow-hidden relative">
-            <div className="flex animate-scroll space-x-12 md:space-x-16">
+          <div className="relative overflow-hidden">
+            {/* Gradient overlays for smooth edge effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10"></div>
+            
+            <div className="flex animate-scroll space-x-8 sm:space-x-12 md:space-x-16 lg:space-x-20">
               {/* First set of logos */}
-              <div className="flex space-x-12 md:space-x-16 shrink-0">
-                <img src="/lovable-uploads/harvard-logo.png" alt="Harvard University" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjOEIwMDAwIi8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/nus-logo.png" alt="National University of Singapore" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjMDA0NEE4Ii8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/iit-logo.png" alt="Indian Institute of Technology" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjRkY4QzAwIi8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/mit-logo.png" alt="Massachusetts Institute of Technology" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjQTMzQTNBIi8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/oxford-logo.png" alt="University of Oxford" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjMDA1MDk1Ii8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/stanford-logo.png" alt="Stanford University" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjOEMxNTE1Ii8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
+              <div className="flex space-x-8 sm:space-x-12 md:space-x-16 lg:space-x-20 shrink-0">
+                {universityLogos.map((university, index) => (
+                  <div key={`first-${index}`} className="flex items-center justify-center p-3 sm:p-4 glass rounded-xl hover:bg-white/5 transition-all duration-300 group min-w-[80px] sm:min-w-[100px]">
+                    <img 
+                      src={university.logo} 
+                      alt={university.name}
+                      className="h-8 sm:h-12 md:h-16 lg:h-20 w-auto object-contain filter brightness-75 group-hover:brightness-100 transition-all duration-300"
+                    />
+                  </div>
+                ))}
               </div>
               {/* Duplicate set for seamless scrolling */}
-              <div className="flex space-x-12 md:space-x-16 shrink-0">
-                <img src="/lovable-uploads/harvard-logo.png" alt="Harvard University" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjOEIwMDAwIi8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/nus-logo.png" alt="National University of Singapore" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjMDA0NEE4Ii8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/iit-logo.png" alt="Indian Institute of Technology" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjRkY4QzAwIi8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/mit-logo.png" alt="Massachusetts Institute of Technology" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjQTMzQTNBIi8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/oxford-logo.png" alt="University of Oxford" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjMDA1MDk1Ii8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
-                <img src="/lovable-uploads/stanford-logo.png" alt="Stanford University" className="h-12 md:h-16 grayscale opacity-60 hover:opacity-80 transition-opacity" onError={(e) => { e.currentTarget.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0zMiA0NEMzOC42MjU4IDQ0IDQ0IDM4LjYyNTggNDQgMzJDNDQgMjUuMzc0MiAzOC42MjU4IDIwIDMyIDIwQzI1LjM3NDIgMjAgMjAgMjUuMzc0MiAyMCAzMkMyMCAzOC42MjU4IDI1LjM3NDIgNDQgMzIgNDRaIiBmaWxsPSIjOEMxNTE1Ii8+CjxyZWN0IHg9IjI4IiB5PSIyOCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"; }} />
+              <div className="flex space-x-8 sm:space-x-12 md:space-x-16 lg:space-x-20 shrink-0">
+                {universityLogos.map((university, index) => (
+                  <div key={`second-${index}`} className="flex items-center justify-center p-3 sm:p-4 glass rounded-xl hover:bg-white/5 transition-all duration-300 group min-w-[80px] sm:min-w-[100px]">
+                    <img 
+                      src={university.logo} 
+                      alt={university.name}
+                      className="h-8 sm:h-12 md:h-16 lg:h-20 w-auto object-contain filter brightness-75 group-hover:brightness-100 transition-all duration-300"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -148,64 +198,68 @@ const Index = () => {
       </section>
 
       {/* Opportunities Section */}
-      <section className="py-20 px-6 relative z-10">
+      <section className="py-16 md:py-20 px-4 md:px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Latest Opportunities
             </h2>
-            <p className="text-xl text-foreground/70">
+            <p className="text-base sm:text-lg md:text-xl text-foreground/70">
               Discover your next research adventure
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mb-6 md:mb-8">
             {opportunities.slice(0, 8).map((opp, index) => (
-              <Card key={opp.id} className="glass hover:bg-white/5 transition-all duration-300" style={{animationDelay: `${index * 0.1}s`}}>
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-xl text-foreground mb-2">
-                        {opp.title}
-                      </CardTitle>
-                      <CardDescription className="text-foreground/80">
-                        {opp.institution}
-                      </CardDescription>
+              <a href="/opportunities" key={opp.id} className="block">
+                <Card className="glass hover:bg-white/5 transition-all duration-300 cursor-pointer hover:scale-105" style={{animationDelay: `${index * 0.1}s`}}>
+                  <CardHeader className="p-4 sm:p-5 md:p-6">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1 min-w-0">
+                        <CardTitle className="text-lg md:text-xl text-foreground mb-2 line-clamp-2">
+                          {opp.title}
+                        </CardTitle>
+                        <CardDescription className="text-foreground/80 text-sm md:text-base">
+                          {opp.institution}
+                        </CardDescription>
+                      </div>
+                      <div className="flex flex-col gap-2 ml-2">
+                        <Badge variant="secondary" className="text-xs">{opp.type}</Badge>
+                        <Badge variant="outline" className="text-xs">{opp.deadline}</Badge>
+                      </div>
                     </div>
-                    <div className="flex gap-2">
-                      <Badge variant="secondary">{opp.type}</Badge>
-                      <Badge variant="outline">{opp.deadline}</Badge>
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
+                  </CardHeader>
+                </Card>
+              </a>
             ))}
           </div>
           
           <div className="text-center">
-            <Button variant="outline" size="lg" className="glass-button">
-              View All Opportunities
-            </Button>
+            <a href="/opportunities">
+              <Button variant="outline" size="lg" className="glass-button px-6 md:px-8 py-3 md:py-4 text-sm md:text-base">
+                View All Opportunities
+              </Button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-6 relative z-10">
+      <section className="py-16 md:py-20 px-4 md:px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               What Our Community Says
             </h2>
-            <p className="text-xl text-foreground/70">
+            <p className="text-base sm:text-lg md:text-xl text-foreground/70">
               Success stories from researchers and students
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((testimonial, index) => (
               <Card key={index} className="glass hover:bg-white/5 transition-all duration-300" style={{animationDelay: `${index * 0.2}s`}}>
-                <CardContent className="p-6">
+                <CardContent className="p-4 sm:p-5 md:p-6">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
                       <span className="text-background font-bold">{testimonial.avatar}</span>
@@ -227,17 +281,17 @@ const Index = () => {
       <section className="py-20 px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-foreground/70">
+            <p className="text-base sm:text-lg md:text-xl text-foreground/70">
               Everything you need to know about ResearchNet
             </p>
           </div>
           
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="glass rounded-lg px-6">
+              <AccordionItem key={index} value={`item-${index}`} className="glass rounded-lg px-4 sm:px-6">
                 <AccordionTrigger className="text-foreground hover:text-foreground/80">
                   {faq.question}
                 </AccordionTrigger>
@@ -252,6 +306,12 @@ const Index = () => {
       
       {/* Footer */}
       <ProfessionalFooter />
+      
+      {/* Sliding Sign In Panel */}
+      <SlidingSignIn 
+        isOpen={isSignInOpen} 
+        onClose={() => setIsSignInOpen(false)} 
+      />
     </div>
   );
 };

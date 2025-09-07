@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
 import ApplicationForm from "@/components/ApplicationForm";
 
@@ -16,7 +17,8 @@ const opportunities = [
     description: "Research position in quantum algorithms and quantum error correction.",
     requirements: "Master's in Physics/CS, GRE scores, Research experience",
     funding: "Full funding available",
-    supervisor: "Dr. Sarah Johnson"
+    supervisor: "Dr. Sarah Johnson",
+    applicationType: "form" // Uses internal form
   },
   {
     id: 2,
@@ -28,7 +30,9 @@ const opportunities = [
     description: "Working on ethical implications of AI in healthcare.",
     requirements: "Bachelor's in CS/Philosophy, Programming skills",
     funding: "$3000/month",
-    supervisor: "Prof. Michael Chen"
+    supervisor: "Prof. Michael Chen",
+    applicationType: "link", // Redirects to external link
+    applicationUrl: "https://stanford.edu/apply/ai-ethics-ra"
   },
   {
     id: 3,
@@ -40,7 +44,8 @@ const opportunities = [
     description: "Junior Research Fellowship in climate modeling and prediction.",
     requirements: "PhD in Environmental Science, Publications required",
     funding: "£35,000/year",
-    supervisor: "Dr. Emma Wilson"
+    supervisor: "Dr. Emma Wilson",
+    applicationType: "form" // Uses internal form
   }
 ];
 
@@ -50,8 +55,14 @@ const Opportunities = () => {
   const [selectedOpportunity, setSelectedOpportunity] = useState<any>(null);
 
   const handleApply = (opportunity: any) => {
-    setSelectedOpportunity(opportunity);
-    setShowApplicationForm(true);
+    if (opportunity.applicationType === "link" && opportunity.applicationUrl) {
+      // Open external link in new tab
+      window.open(opportunity.applicationUrl, "_blank");
+    } else {
+      // Show internal application form
+      setSelectedOpportunity(opportunity);
+      setShowApplicationForm(true);
+    }
   };
 
   return (
@@ -120,9 +131,12 @@ const Opportunities = () => {
                           e.stopPropagation();
                           handleApply(opportunity);
                         }}
-                        className="px-8 py-3"
+                        className="px-8 py-3 flex items-center gap-2"
                       >
                         Apply Now
+                        {opportunity.applicationType === "link" && (
+                          <ExternalLink size={16} className="ml-1" />
+                        )}
                       </Button>
                     </div>
                   </div>

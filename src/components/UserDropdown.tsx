@@ -23,17 +23,16 @@ const UserDropdown = () => {
   };
 
   return (
-    <div className="fixed top-6 right-6 z-[60]">
-      <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center gap-2 glass p-2 rounded-full hover:bg-white/10 transition-colors group outline-none">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={user.avatar} alt={user.name} />
-            <AvatarFallback className="bg-primary text-primary-foreground text-sm">
-              {user.initials}
-            </AvatarFallback>
-          </Avatar>
-          <ChevronDown size={14} className="text-foreground/60 group-hover:text-foreground transition-colors" />
-        </DropdownMenuTrigger>
+    <DropdownMenu>
+      <DropdownMenuTrigger className="flex items-center gap-2 glass p-2 rounded-full hover:bg-white/10 transition-colors group outline-none">
+        <Avatar className="h-8 w-8">
+          <AvatarImage src={user.avatar} alt={user.name} />
+          <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+            {user.initials}
+          </AvatarFallback>
+        </Avatar>
+        <ChevronDown size={14} className="text-foreground/60 group-hover:text-foreground transition-colors" />
+      </DropdownMenuTrigger>
         <DropdownMenuContent 
           align="end" 
           className="w-48 bg-background/95 backdrop-blur-sm border-white/10"
@@ -80,9 +79,8 @@ const UserDropdown = () => {
             <LogOut size={16} />
             Sign Out
           </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

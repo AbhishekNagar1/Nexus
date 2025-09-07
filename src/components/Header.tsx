@@ -1,57 +1,89 @@
-import { User, MessageSquare } from "lucide-react";
-import { useState } from "react";
+import { MessageSquare, Menu, X } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import UserDropdown from "@/components/UserDropdown";
+import { useState } from "react";
+import NexusLogo from "@/assets/nexus_logo.svg";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[100]">
-      <nav className="glass px-8 py-4 rounded-full flex items-center gap-8">
-        <a href="/" className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-            <svg 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-              className="text-background"
-            >
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
-              <line x1="12" y1="22.08" x2="12" y2="12"/>
-            </svg>
-          </div>
-          <span className="text-xl font-bold text-foreground">ResearchNet</span>
+    <header className="fixed top-3 md:top-6 left-3 md:left-1/2 md:transform md:-translate-x-1/2 z-[100] w-[calc(100%-6rem)] md:w-auto">
+      <nav className="glass px-4 md:px-8 py-3 md:py-4 rounded-full flex items-center justify-between gap-4 md:gap-8">
+        <a href="/" className="flex items-center gap-2 md:gap-3">
+          <img 
+            src={NexusLogo} 
+            alt="Nexus Logo" 
+            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+          />
+          <span className="text-lg md:text-xl font-bold text-foreground"> </span>
         </a>
         
-        <div className="flex items-center gap-6">
-          <a href="/opportunities" className="text-foreground/80 hover:text-foreground transition-colors">
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-3 md:gap-6">
+          <a href="/opportunities" className="text-foreground/80 hover:text-foreground transition-colors text-sm md:text-base">
             Opportunities
           </a>
-          <a href="/researchers" className="text-foreground/80 hover:text-foreground transition-colors">
+          <a href="/researchers" className="text-foreground/80 hover:text-foreground transition-colors text-sm md:text-base">
             Researchers
           </a>
-          <a href="/community" className="text-foreground/80 hover:text-foreground transition-colors">
+          <a href="/community" className="text-foreground/80 hover:text-foreground transition-colors text-sm md:text-base">
             Community
           </a>
           
           {isAuthenticated && (
-            <>
-              <a href="/messages" className="text-foreground/80 hover:text-foreground transition-colors p-2 rounded-full hover:bg-white/10">
-                <MessageSquare size={20} />
-              </a>
-            </>
+            <a href="/messages" className="text-foreground/80 hover:text-foreground transition-colors p-2 rounded-full hover:bg-white/10">
+              <MessageSquare size={18} className="md:w-5 md:h-5" />
+            </a>
           )}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="lg:hidden p-2 rounded-full hover:bg-white/10 transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </nav>
       
-      {isAuthenticated && <UserDropdown />}
+      {/* Mobile Navigation Menu */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden absolute top-full left-0 right-0 mt-2 glass rounded-2xl p-4 space-y-3">
+          <a 
+            href="/opportunities" 
+            className="block text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Opportunities
+          </a>
+          <a 
+            href="/researchers" 
+            className="block text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Researchers
+          </a>
+          <a 
+            href="/community" 
+            className="block text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Community
+          </a>
+          
+          {isAuthenticated && (
+            <a 
+              href="/messages" 
+              className="flex items-center gap-3 text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <MessageSquare size={18} />
+              Messages
+            </a>
+          )}
+        </div>
+      )}
     </header>
   );
 };

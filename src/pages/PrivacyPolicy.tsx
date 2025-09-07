@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ProfessionalFooter from "@/components/ProfessionalFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const PrivacyPolicy = () => {
@@ -183,7 +183,7 @@ const PrivacyPolicy = () => {
         </div>
       </main>
 
-      <Footer />
+      <ProfessionalFooter />
     </div>
   );
 };

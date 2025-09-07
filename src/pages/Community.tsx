@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";  
+import ProfessionalFooter from "@/components/ProfessionalFooter";  
 
 
 const posts = [
@@ -78,6 +78,15 @@ const Community = () => {
             <p className="text-xl text-foreground/70">
               Connect, share, and collaborate with researchers worldwide
             </p>
+          </div>
+
+          {/* Development Notice Scroll */}
+          <div className="overflow-hidden mb-8">
+            <div className="animate-scroll whitespace-nowrap py-2">
+              <span className="text-red-500 font-medium text-sm inline-block px-4">
+                This section is currently under development and will be available soon for use. We are working hard to bring you an amazing community experience with enhanced features, real-time messaging, collaborative tools, and seamless networking opportunities for researchers worldwide.
+              </span>
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-4 gap-6">
@@ -212,7 +221,7 @@ const Community = () => {
         </div>
       </main>
 
-      <Footer />
+      <ProfessionalFooter />
     </div>
   );
 };
