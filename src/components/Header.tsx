@@ -2,11 +2,9 @@ import { User, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import UserDropdown from "@/components/UserDropdown";
-import SlidingSignIn from "@/components/SlidingSignIn";
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
-  const [isSignInOpen, setIsSignInOpen] = useState(false);
 
   return (
     <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[100]">
@@ -43,29 +41,17 @@ const Header = () => {
             Community
           </a>
           
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <>
               <a href="/messages" className="text-foreground/80 hover:text-foreground transition-colors p-2 rounded-full hover:bg-white/10">
                 <MessageSquare size={20} />
               </a>
             </>
-          ) : null}
+          )}
         </div>
       </nav>
       
-      {/* Signin Icon - Top Left Corner */}
-      {!isAuthenticated && (
-        <button
-          onClick={() => setIsSignInOpen(true)}
-          className="fixed top-6 left-6 z-[60] p-3 rounded-full bg-background/90 backdrop-blur-sm border border-border shadow-lg hover:bg-background transition-all duration-300 hover:shadow-xl"
-        >
-          <User size={20} className="text-foreground" />
-        </button>
-      )}
-      
       {isAuthenticated && <UserDropdown />}
-      
-      <SlidingSignIn isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
     </header>
   );
 };

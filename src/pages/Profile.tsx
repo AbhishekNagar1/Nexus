@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
-import ProfessionalFooter from "@/components/ProfessionalFooter";
+import Footer from "@/components/Footer";
 
 const Profile = () => {
   return (
@@ -203,7 +203,7 @@ const Profile = () => {
         </div>
       </main>
 
-      <ProfessionalFooter />
+      <Footer />
     </div>
   );
 };
