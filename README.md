@@ -1,73 +1,172 @@
-# Welcome to your Lovable project
+# Nexus - Academic Networking Platform
 
-## Project info
+Connect with professors, universities, and research institutes. Find PhD opportunities, research positions, and academic collaborations worldwide.
 
-**URL**: https://lovable.dev/projects/55b56e56-df0f-4299-a7bc-d9059243ba84
+## 🌟 Overview
 
-## How can I edit this code?
+Nexus is a modern academic networking platform designed to bridge the gap between researchers, students, and institutions. Our mission is to facilitate meaningful connections that drive academic excellence and foster global research collaboration.
 
-There are several ways of editing your application.
+## ✨ Features
 
-**Use Lovable**
+- **🔍 Opportunity Discovery**: Browse PhD positions, research fellowships, and academic jobs  
+- **👥 Academic Networking**: Connect with researchers, professors, and institutions worldwide  
+- **💬 Messaging System**: Direct communication with potential collaborators  
+- **📱 Community Hub**: Share insights and engage with the academic community  
+- **🔐 Secure Authentication**: Protected user profiles and data  
+- **📊 Profile Management**: Showcase your academic background and research interests  
+- **🌐 Global Reach**: Access opportunities from top universities worldwide  
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/55b56e56-df0f-4299-a7bc-d9059243ba84) and start prompting.
+## 🚀 Technology Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Frontend**: React 18.3.1 with TypeScript  
+- **Build Tool**: Vite 5.4.19  
+- **UI Framework**: shadcn/ui (Radix UI + Tailwind CSS)  
+- **Styling**: Tailwind CSS with custom glassmorphism effects  
+- **State Management**: React Query + React Context API  
+- **Authentication**: Supabase Auth  
+- **Database**: Supabase  
+- **Deployment**: Netlify  
 
-**Use your preferred IDE**
+## 🛠️ Development Setup
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
+- Node.js (v16 or higher)  
+- npm or yarn  
+- Git  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AbhishekNagar1/Nexus.git
+   cd Nexus
+   ```
 
-Follow these steps:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. **Open your browser**  
+   Navigate to `http://localhost:8080`
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Available Scripts
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run preview  # Preview production build
+npm run lint     # Run ESLint
 ```
 
-**Edit a file directly in GitHub**
+## 🎨 Design System
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+* **Dark Theme**: Sophisticated dark mode with proper contrast  
+* **Glassmorphism**: Modern glass effects throughout the interface  
+* **Responsive Design**: Mobile-first approach with touch-friendly interactions  
+* **University Branding**: Integration with top university logos and branding  
+* **Accessibility**: WCAG compliant with proper focus management  
 
-**Use GitHub Codespaces**
+## 🏗️ Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+src/
+├── components/          # Reusable UI components
+│   ├── ui/              # shadcn/ui components
+│   ├── Header.tsx       # Navigation header
+│   ├── Footer.tsx       # Site footer
+│   └── ...
+├── pages/               # Page components
+│   ├── Index.tsx        # Landing page
+│   ├── Opportunities.tsx
+│   ├── Community.tsx
+│   └── ...
+├── hooks/               # Custom React hooks
+├── assets/              # Static assets (logos, images)
+├── lib/                 # Utility functions
+└── integrations/        # Third-party integrations
+```
 
-## What technologies are used for this project?
+## 🌐 Deployment
 
-This project is built with:
+### Netlify Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+* Connect your repository to Netlify  
+* Build settings are automatically configured via `netlify.toml`  
+* Deploy: Your site will be live at your Netlify URL  
 
-## How can I deploy this project?
+**Build Configuration**
 
-Simply open [Lovable](https://lovable.dev/projects/55b56e56-df0f-4299-a7bc-d9059243ba84) and click on Share -> Publish.
+* Build command: `npm run build`  
+* Publish directory: `dist`  
+* Node version: `18`  
 
-## Can I connect a custom domain to my Lovable project?
+## 🤝 Contributing
 
-Yes, you can!
+### How to Contribute
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Fork the repository  
+2. Create a feature branch  
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. Commit your changes  
+   ```bash
+   git commit -m "Add amazing feature"
+   ```
+4. Push to the branch  
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. Open a Pull Request  
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Development Guidelines
+
+* Follow TypeScript best practices  
+* Use Tailwind CSS for styling  
+* Ensure mobile responsiveness  
+* Write clear commit messages  
+* Test your changes thoroughly  
+
+## 📄 License
+
+This project is open source and available under the **MIT License**.
+
+## 👨‍💻 Author
+
+**Abhishek Nagar**
+
+* Email: [abhisheknagar679@gmail.com](mailto:abhisheknagar679@gmail.com)  
+* GitHub: [@AbhishekNagar1](https://github.com/AbhishekNagar1)  
+
+## 🙏 Acknowledgments
+
+* **Universities**: Thanks to all the institutions that inspire our mission  
+* **Open Source Community**: For the amazing tools and libraries  
+* **Contributors**: Everyone who helps make Nexus better  
+* **Users**: The academic community that drives our purpose  
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+* Check the Issues page  
+* Create a new issue if needed  
+* Contact the maintainer: [abhisheknagar679@gmail.com](mailto:abhisheknagar679@gmail.com)  
+
+## 🔮 Roadmap
+
+* Advanced search and filtering  
+* Real-time messaging system  
+* Mobile application  
+* Integration with academic databases  
+* AI-powered opportunity matching  
+* Multi-language support  
+
+---
+
+**Nexus - Connecting minds for academic excellence 🎓**
