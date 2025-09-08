@@ -1,3 +1,5 @@
+<img src="src/assets/nexus_logo.svg" alt="Nexus Logo" width="200"/>
+
 # Nexus - Academic Networking Platform
 
 Connect with professors, universities, and research institutes. Find PhD opportunities, research positions, and academic collaborations worldwide.
