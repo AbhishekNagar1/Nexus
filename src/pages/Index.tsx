@@ -70,19 +70,19 @@ const Index = () => {
     {
       name: "Dr. Sarah Chen",
       role: "Professor at MIT",
-      text: "ResearchNet connected me with brilliant students who became integral to my quantum computing research.",
+      text: "Nexus connected me with brilliant students who became integral to my quantum computing research.",
       avatar: "SC"
     },
     {
       name: "Alex Rodriguez",
       role: "PhD Student",
-      text: "Found my dream research position through ResearchNet. The platform made the application process seamless.",
+      text: "Found my dream research position through Nexus. The platform made the application process seamless.",
       avatar: "AR"
     },
     {
       name: "Prof. Michael Johnson",
       role: "Oxford University",
-      text: "The quality of candidates we find through ResearchNet is exceptional. Highly recommended for academic recruitment.",
+      text: "The quality of candidates we find through Nexus is exceptional. Highly recommended for academic recruitment.",
       avatar: "MJ"
     }
   ];
@@ -93,8 +93,8 @@ const Index = () => {
       answer: "Browse opportunities, click on positions that interest you, and submit your application through our streamlined form with your CV and research interests."
     },
     {
-      question: "Is ResearchNet free to use?",
-      answer: "Yes, ResearchNet is completely free for students and researchers. We believe in democratizing access to academic opportunities."
+      question: "Is Nexus free to use?",
+      answer: "Yes, Nexus is completely free for students and researchers. We believe in democratizing access to academic opportunities."
     },
     {
       question: "How are opportunities verified?",
@@ -326,7 +326,7 @@ const Index = () => {
               Frequently Asked Questions
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-foreground/70">
-              Everything you need to know about ResearchNet
+              Everything you need to know about Nexus
             </p>
           </div>
           
