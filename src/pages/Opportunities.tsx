@@ -232,7 +232,7 @@ const Opportunities = () => {
     type: "",
     institute: "",
     salaryRange: [54, 90],
-    cardLayout: "double", // "single" or "double"
+    cardLayout: "single", // "single" or "double" - Default to single for mobile
     workingSchedule: {
       fullTime: true,
       partTime: false,
@@ -464,14 +464,14 @@ const Opportunities = () => {
     <Layout>
       <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/10">
         {/* Search Bar */}
-        <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-sm border-b border-white/10">
+        <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-sm border-b border-white/10 mt-4 md:mt-0">
           <div className="max-w-7xl mx-auto px-6 py-4">
             {/* Desktop Search Bar */}
             <div className="hidden md:flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-2xl p-4">
               <div className="flex items-center gap-3 flex-1">
                 <Search className="text-gray-400" size={20} />
                 <Select value={filters.search} onValueChange={(value) => setFilters(prev => ({ ...prev, search: value }))}>
-                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                     <SelectValue placeholder="Designer" />
                   </SelectTrigger>
                   <SelectContent>
@@ -485,7 +485,7 @@ const Opportunities = () => {
               <div className="flex items-center gap-3 flex-1">
                 <MapPin className="text-gray-400" size={20} />
                 <Select value={filters.location} onValueChange={(value) => setFilters(prev => ({ ...prev, location: value }))}>
-                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                     <SelectValue placeholder="Location" />
                   </SelectTrigger>
                   <SelectContent>
@@ -502,7 +502,7 @@ const Opportunities = () => {
               <div className="flex items-center gap-3 flex-1">
                 <Calendar className="text-gray-400" size={20} />
                 <Select value={filters.type} onValueChange={(value) => setFilters(prev => ({ ...prev, type: value }))}>
-                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                     <SelectValue placeholder="Type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -519,7 +519,7 @@ const Opportunities = () => {
               <div className="flex items-center gap-3 flex-1">
                 <Building className="text-gray-400" size={20} />
                 <Select value={filters.institute} onValueChange={(value) => setFilters(prev => ({ ...prev, institute: value }))}>
-                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                  <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                     <SelectValue placeholder="Institute" />
                   </SelectTrigger>
                   <SelectContent>
@@ -544,7 +544,7 @@ const Opportunities = () => {
                 <div className="flex items-center gap-3 min-w-[200px]">
                   <Search className="text-gray-400" size={20} />
                   <Select value={filters.search} onValueChange={(value) => setFilters(prev => ({ ...prev, search: value }))}>
-                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                       <SelectValue placeholder="Designer" />
                     </SelectTrigger>
                     <SelectContent>
@@ -558,7 +558,7 @@ const Opportunities = () => {
                 <div className="flex items-center gap-3 min-w-[200px]">
                   <MapPin className="text-gray-400" size={20} />
                   <Select value={filters.location} onValueChange={(value) => setFilters(prev => ({ ...prev, location: value }))}>
-                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                       <SelectValue placeholder="Location" />
                     </SelectTrigger>
                     <SelectContent>
@@ -575,7 +575,7 @@ const Opportunities = () => {
                 <div className="flex items-center gap-3 min-w-[200px]">
                   <Calendar className="text-gray-400" size={20} />
                   <Select value={filters.type} onValueChange={(value) => setFilters(prev => ({ ...prev, type: value }))}>
-                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                       <SelectValue placeholder="Type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -592,7 +592,7 @@ const Opportunities = () => {
                 <div className="flex items-center gap-3 min-w-[200px]">
                   <Building className="text-gray-400" size={20} />
                   <Select value={filters.institute} onValueChange={(value) => setFilters(prev => ({ ...prev, institute: value }))}>
-                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0">
+                    <SelectTrigger className="bg-transparent border-none text-white focus:outline-none focus:ring-0 focus:ring-offset-0">
                       <SelectValue placeholder="Institute" />
                     </SelectTrigger>
                     <SelectContent>
@@ -633,7 +633,7 @@ const Opportunities = () => {
                 <div className="flex items-center gap-2">
                   <span className="text-gray-400 text-sm">Sort by</span>
                   <Select defaultValue="stipend">
-                    <SelectTrigger className="bg-white/10 border-white/20 text-white w-40">
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white w-40 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-white/20">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -695,20 +695,18 @@ const Opportunities = () => {
 
           {/* Mobile Layout */}
           <div className="lg:hidden">
-            {/* Mobile Filter and Sort Row */}
+            {/* Mobile Header with Title and Filter */}
             <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
+              {/* Left side: Title with Badge */}
+              <div className="flex items-center gap-1">
                 <h1 className="text-white text-xl font-bold">Recommended Roles</h1>
-                <Badge className="bg-white/10 text-white">{opportunities.length}</Badge>
+                <Badge className="bg-white/10 text-white ml-1">{opportunities.length}</Badge>
               </div>
               
-              {/* Combined Filter Dropdown */}
+              {/* Right side: Filter Icon */}
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button className="bg-white/10 border-white/20 text-white px-4 py-2">
-                    <Filter size={16} className="mr-2" />
-                    Filter
-                  </Button>
+                  <Filter size={20} className="text-white cursor-pointer hover:text-gray-300 transition-colors" />
                 </SheetTrigger>
                 <SheetContent side="bottom" className="bg-background/95 backdrop-blur-sm border-white/20 h-[80vh] overflow-y-auto">
                   <div className="p-6">
@@ -743,7 +741,7 @@ const Opportunities = () => {
                     <div className="mb-6">
                       <h4 className="text-white font-medium mb-3">Sort By</h4>
                       <Select defaultValue="stipend">
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white focus:outline-none focus:ring-0">
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-white/20">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -900,18 +898,18 @@ const Opportunities = () => {
             <div className="p-6">
               <DialogHeader className="mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center">
+                  <div className="w-16 h-16 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center flex-shrink-0">
                     <img 
                       src={detailOpportunity.logo} 
                       alt={`${detailOpportunity.institution} logo`}
-                      className="w-12 h-12 object-contain"
+                      className="w-10 h-10 md:w-12 md:h-12 object-contain"
                     />
                   </div>
-                  <div>
-                    <DialogTitle className="text-2xl font-bold text-white">
+                  <div className="flex-1 min-w-0">
+                    <DialogTitle className="text-xl md:text-2xl font-bold text-white">
                       {detailOpportunity.title}
                     </DialogTitle>
-                    <p className="text-lg text-gray-300">{detailOpportunity.institution}</p>
+                    <p className="text-base md:text-lg text-gray-300">{detailOpportunity.institution}</p>
                     <p className="text-sm text-gray-400">{detailOpportunity.location}</p>
                   </div>
                 </div>

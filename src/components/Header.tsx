@@ -52,21 +52,21 @@ const Header = () => {
         <div className="lg:hidden absolute top-full left-0 right-0 mt-2 glass rounded-2xl p-4 space-y-3">
           <a 
             href="/opportunities" 
-            className="block text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+            className="block text-foreground/80 hover:text-foreground transition-all duration-300 py-2 px-3 rounded-lg hover:bg-white/5 hover-scale"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Opportunities
           </a>
           <a 
             href="/researchers" 
-            className="block text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+            className="block text-foreground/80 hover:text-foreground transition-all duration-300 py-2 px-3 rounded-lg hover:bg-white/5 hover-scale"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Researchers
           </a>
           <a 
             href="/community" 
-            className="block text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+            className="block text-foreground/80 hover:text-foreground transition-all duration-300 py-2 px-3 rounded-lg hover:bg-white/5 hover-scale"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Community
@@ -75,10 +75,10 @@ const Header = () => {
           {isAuthenticated && (
             <a 
               href="/messages" 
-              className="flex items-center gap-3 text-foreground/80 hover:text-foreground transition-colors py-2 px-3 rounded-lg hover:bg-white/5"
+              className="flex items-center gap-3 text-foreground/80 hover:text-foreground transition-all duration-300 py-2 px-3 rounded-lg hover:bg-white/5 hover-scale"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <MessageSquare size={18} />
+              <MessageSquare size={18} className="animate-pulse-custom" />
               Messages
             </a>
           )}

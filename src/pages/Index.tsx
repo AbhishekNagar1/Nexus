@@ -131,15 +131,15 @@ const Index = () => {
         </div>
         
         {/* Hero Content */}
-        <div className="relative z-50 text-center max-w-4xl mx-auto px-4 md:px-6">
+        <div className="relative z-50 text-center max-w-4xl mx-auto px-4 md:px-6 animate-fade-in-up">
           <div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-black mb-6 md:mb-8 leading-[0.8] w-full flex items-center justify-center">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-black mb-6 md:mb-8 leading-[0.8] w-full flex items-center justify-center animate-fade-in-down stagger-1">
               <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent relative z-50 text-center mx-auto">
                 Connecting Minds
               </span>
             </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-foreground/70 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed text-center px-4">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-foreground/70 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed text-center px-4 animate-fade-in-up stagger-2">
               The premier platform connecting professors, universities, and research institutes with talented students worldwide.
             </p>
             
@@ -299,10 +299,10 @@ const Index = () => {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="glass hover:bg-white/5 transition-all duration-300" style={{animationDelay: `${index * 0.2}s`}}>
+              <Card key={index} className={`glass hover:bg-white/5 transition-all duration-500 hover-lift animate-fade-in-up stagger-${Math.min(index + 1, 6)}`}>
                 <CardContent className="p-4 sm:p-5 md:p-6">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center hover-scale transition-all duration-300">
                       <span className="text-background font-bold">{testimonial.avatar}</span>
                     </div>
                     <div>
