@@ -75,7 +75,12 @@ const UserDropdown = () => {
           
           <DropdownMenuSeparator className="border-white/10" />
           
-          <DropdownMenuItem onClick={logout} className="flex items-center gap-2 cursor-pointer text-destructive">
+          <DropdownMenuItem
+            onClick={() => {
+              void logout();
+            }}
+            className="flex items-center gap-2 cursor-pointer text-destructive"
+          >
             <LogOut size={16} />
             Sign Out
           </DropdownMenuItem>

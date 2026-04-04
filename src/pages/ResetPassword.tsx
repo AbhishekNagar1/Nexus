@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Layout from "@/components/Layout";
 import { Eye, EyeOff, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,8 +16,9 @@ const ResetPassword = () => {
     confirmPassword: ""
   });
   const { toast } = useToast();
+  const { updatePassword } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.password || !formData.confirmPassword) {
@@ -49,13 +51,22 @@ const ResetPassword = () => {
       return;
     }
     
-    toast({
-      title: "Coming Soon! 🔐",
-      description: "Password reset functionality is currently in development. This feature will be available soon!",
-      duration: 4000,
-    });
-    
-    console.log("Reset password:", formData);
+    try {
+      await updatePassword(formData.password);
+      toast({
+        title: "Password updated",
+        description: "Your password has been reset successfully.",
+        duration: 4000,
+      });
+      setFormData({ password: "", confirmPassword: "" });
+    } catch (error) {
+      toast({
+        title: "Password update failed",
+        description: (error as Error).message || "Please try again.",
+        variant: "destructive",
+        duration: 4000,
+      });
+    }
   };
 
   return (
@@ -135,8 +146,8 @@ const ResetPassword = () => {
 
               <div className="text-center text-sm text-foreground/70">
                 Remember your password?{" "}
-                <a href="/signin" className="text-primary hover:underline font-medium">
-                  Sign in
+                <a href="/" className="text-primary hover:underline font-medium">
+                  Go home
                 </a>
               </div>
             </CardContent>

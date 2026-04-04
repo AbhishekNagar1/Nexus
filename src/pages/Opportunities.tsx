@@ -8,7 +8,7 @@ import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ExternalLink, Filter, Search, MapPin, Building, Calendar, Clock, ChevronLeft, ChevronRight, X, Upload } from "lucide-react";
+import { ExternalLink, Filter, Search, MapPin, Building, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import ApplicationForm from "@/components/ApplicationForm";
 import { useToast } from "@/hooks/use-toast";
@@ -225,7 +225,6 @@ const Opportunities = () => {
   const [selectedOpportunity, setSelectedOpportunity] = useState<any>(null);
   const [showDetailSlider, setShowDetailSlider] = useState(false);
   const [detailOpportunity, setDetailOpportunity] = useState<any>(null);
-  const [showInternalForm, setShowInternalForm] = useState(false);
   const [filters, setFilters] = useState({
     search: "",
     location: "",
@@ -266,7 +265,7 @@ const Opportunities = () => {
 
   const handleApplyForm = (opportunity: any) => {
     setSelectedOpportunity(opportunity);
-    setShowInternalForm(true);
+    setShowApplicationForm(true);
     setShowDetailSlider(false);
   };
 
@@ -282,13 +281,6 @@ const Opportunities = () => {
     }
   };
 
-  const handleFileUpload = (fileType: string) => {
-    toast({
-      title: "Coming Soon! 📄",
-      description: `${fileType} upload functionality is currently in development!`,
-      duration: 3000,
-    });
-  };
 
   const FilterSidebar = () => (
     <div className="w-80 bg-white/5 backdrop-blur-sm rounded-2xl p-6 h-fit sticky top-6">
@@ -1017,143 +1009,15 @@ const Opportunities = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Internal Application Form Modal */}
-      <Dialog open={showInternalForm} onOpenChange={setShowInternalForm}>
-        <DialogContent className="max-w-2xl max-h-[85vh] mt-16 overflow-y-auto bg-black/95 backdrop-blur-sm border-white/20 text-white">
-          {selectedOpportunity && (
-            <div className="p-6">
-              <DialogHeader className="mb-6">
-                <div>
-                  <DialogTitle className="text-2xl font-bold text-white">
-                    Apply for {selectedOpportunity.title}
-                  </DialogTitle>
-                  <p className="text-gray-300">{selectedOpportunity.institution}</p>
-                </div>
-              </DialogHeader>
-
-              <form className="space-y-6">
-                {/* Personal Information */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-white">Personal Information</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">First Name *</label>
-                      <Input 
-                        placeholder="Enter your first name"
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Last Name *</label>
-                      <Input 
-                        placeholder="Enter your last name"
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
-                    <Input 
-                      type="email"
-                      placeholder="Enter your email"
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Phone Number *</label>
-                    <Input 
-                      placeholder="Enter your phone number"
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                    />
-                  </div>
-                </div>
-
-                {/* Document Uploads */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-white">Documents</h3>
-                  
-                  {/* ID Document */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">ID Document *</label>
-                    <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-white/40 transition-colors cursor-pointer"
-                         onClick={() => handleFileUpload('ID Document')}>
-                      <Upload className="mx-auto text-gray-400 mb-2" size={24} />
-                      <p className="text-gray-400 text-sm">Click to upload ID document</p>
-                    </div>
-                  </div>
-
-                  {/* Marksheet */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Academic Transcripts/Marksheet *</label>
-                    <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-white/40 transition-colors cursor-pointer"
-                         onClick={() => handleFileUpload('Marksheet')}>
-                      <Upload className="mx-auto text-gray-400 mb-2" size={24} />
-                      <p className="text-gray-400 text-sm">Click to upload marksheet/transcripts</p>
-                    </div>
-                  </div>
-
-                  {/* Resume */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Resume/CV *</label>
-                    <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-white/40 transition-colors cursor-pointer"
-                         onClick={() => handleFileUpload('Resume')}>
-                      <Upload className="mx-auto text-gray-400 mb-2" size={24} />
-                      <p className="text-gray-400 text-sm">Click to upload resume/CV</p>
-                    </div>
-                  </div>
-
-                  {/* Statement of Purpose (Optional) */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Statement of Purpose (Optional)</label>
-                    <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-white/40 transition-colors cursor-pointer"
-                         onClick={() => handleFileUpload('Statement of Purpose')}>
-                      <Upload className="mx-auto text-gray-400 mb-2" size={24} />
-                      <p className="text-gray-400 text-sm">Click to upload SOP (optional)</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Cover Letter */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Cover Letter (Optional)</label>
-                  <textarea 
-                    placeholder="Write a brief cover letter explaining your interest..."
-                    rows={4}
-                    className="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <div className="flex gap-3 pt-4">
-                  <Button 
-                    type="button"
-                    variant="outline"
-                    className="flex-1 border-white/20 text-white hover:bg-white/10"
-                    onClick={() => setShowInternalForm(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button 
-                    type="submit"
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toast({
-                        title: "Application Submitted! 🎉",
-                        description: "Your application has been submitted successfully. You will receive a confirmation email shortly.",
-                        duration: 5000,
-                      });
-                      setShowInternalForm(false);
-                    }}
-                  >
-                    Submit Application
-                  </Button>
-                </div>
-              </form>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      {showApplicationForm && selectedOpportunity && (
+        <ApplicationForm
+          opportunity={selectedOpportunity}
+          onClose={() => {
+            setShowApplicationForm(false);
+            setSelectedOpportunity(null);
+          }}
+        />
+      )}
     </Layout>
   );
 };

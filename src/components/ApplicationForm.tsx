@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { profileService } from "@/services/profileService";
+import { opportunityService } from "@/services/opportunityService";
 
 interface ApplicationFormProps {
   opportunity: any;
@@ -26,7 +28,7 @@ const ApplicationForm = ({ opportunity, onClose }: ApplicationFormProps) => {
   });
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate required fields
@@ -40,16 +42,38 @@ const ApplicationForm = ({ opportunity, onClose }: ApplicationFormProps) => {
       return;
     }
     
-    // Show coming soon toast
-    toast({
-      title: "Coming Soon! 📝",
-      description: "Application submission system is currently in development. Your application data has been saved locally for when the feature goes live!",
-      duration: 5000,
-    });
-    
-    // Handle form submission (currently in development)
-    console.log("Application submitted:", formData);
-    onClose();
+    try {
+      const cvUrl = formData.cv ? await profileService.uploadOwnDocument(formData.cv) : undefined;
+
+      await opportunityService.applyToOpportunity(opportunity.id, {
+        cover_letter: formData.coverLetter,
+        cv_url: cvUrl,
+        additional_documents: {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          university: formData.university,
+          degree: formData.degree,
+          gpa: formData.gpa,
+          researchExperience: formData.researchExperience,
+          publications: formData.publications,
+        },
+      });
+
+      toast({
+        title: "Application submitted",
+        description: "Your application has been submitted successfully.",
+        duration: 4000,
+      });
+      onClose();
+    } catch (error) {
+      toast({
+        title: "Submission failed",
+        description: (error as Error).message || "Unable to submit your application.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
