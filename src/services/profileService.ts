@@ -1,5 +1,8 @@
 import { supabase } from "@/integrations/supabase/client";
 
+const ALLOWED_AVATAR_EXTENSIONS = new Set(["jpg", "jpeg", "png", "gif", "webp"]);
+const ALLOWED_DOCUMENT_EXTENSIONS = new Set(["pdf", "doc", "docx"]);
+
 type ProfileUpdate = {
   first_name?: string | null;
   last_name?: string | null;
@@ -31,7 +34,10 @@ export const profileService = {
   },
 
   async uploadAvatar(userId: string, file: File) {
-    const ext = file.name.split(".").pop();
+    const ext = file.name.split(".").pop()?.toLowerCase();
+    if (!ext || !ALLOWED_AVATAR_EXTENSIONS.has(ext)) {
+      throw new Error("Unsupported avatar file type. Allowed: jpg, jpeg, png, gif, webp.");
+    }
     const path = `${userId}/avatar.${ext ?? "png"}`;
 
     const { error: uploadError } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
@@ -43,7 +49,10 @@ export const profileService = {
   },
 
   async uploadDocument(userId: string, file: File) {
-    const ext = file.name.split(".").pop();
+    const ext = file.name.split(".").pop()?.toLowerCase();
+    if (!ext || !ALLOWED_DOCUMENT_EXTENSIONS.has(ext)) {
+      throw new Error("Unsupported document file type. Allowed: pdf, doc, docx.");
+    }
     const stamp = Date.now();
     const path = `${userId}/${stamp}.${ext ?? "dat"}`;
 
