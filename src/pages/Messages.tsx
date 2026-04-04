@@ -40,6 +40,16 @@ const Messages = () => {
     [conversations, selectedConversation],
   );
 
+  const unreadConversationIds = useMemo(() => {
+    const set = new Set<string>();
+    for (const message of messages) {
+      if (message.sender_id !== user?.id && !message.is_read) {
+        set.add(message.conversation_id);
+      }
+    }
+    return set;
+  }, [messages, user?.id]);
+
   useEffect(() => {
     if (!isAuthenticated) return;
     let mounted = true;
@@ -167,7 +177,7 @@ const Messages = () => {
                       ) : (
                         conversations.map((conv) => {
                           const title = conv.title || "Conversation";
-                          const unread = messages.some((m) => m.conversation_id === conv.id && m.sender_id !== user?.id && !m.is_read);
+                          const unread = unreadConversationIds.has(conv.id);
                           const subtitle = `Participants: ${conv.participants.length}`;
                           const time = new Date(conv.updated_at).toLocaleString();
                           return (

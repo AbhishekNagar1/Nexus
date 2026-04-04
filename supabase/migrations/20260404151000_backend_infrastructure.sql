@@ -3,6 +3,8 @@
 
 create extension if not exists "pgcrypto";
 
+comment on extension "pgcrypto" is 'Provides gen_random_uuid() used by Nexus table IDs.';
+
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   email text unique not null,
@@ -49,6 +51,9 @@ create table if not exists public.opportunities (
   updated_at timestamptz not null default now()
 );
 
+comment on column public.opportunities.requirements is
+  'JSON object containing structured requirement fields (e.g. gpa, experience, skills, documents_required).';
+
 create table if not exists public.applications (
   id uuid primary key default gen_random_uuid(),
   opportunity_id uuid not null references public.opportunities(id) on delete cascade,
@@ -62,6 +67,9 @@ create table if not exists public.applications (
   reviewer_notes text,
   unique (opportunity_id, applicant_id)
 );
+
+comment on column public.applications.additional_documents is
+  'JSON object with structured submitted metadata and optional document URLs (e.g. transcripts_url, sop_url, form metadata).';
 
 create table if not exists public.conversations (
   id uuid primary key default gen_random_uuid(),
