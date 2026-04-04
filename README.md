@@ -57,6 +57,39 @@ Nexus is a modern academic networking platform designed to bridge the gap betwee
 4. **Open your browser**  
    Navigate to `http://localhost:8080`
 
+### Supabase Backend Setup
+
+1. Create a `.env.local` (or `.env`) file in the project root:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+2. Install Supabase CLI and link your project:
+   ```bash
+   npm install -g supabase
+   supabase login
+   supabase link --project-ref <your-project-ref>
+   ```
+
+3. Apply database migrations:
+   ```bash
+   supabase db push
+   ```
+
+4. Deploy edge functions:
+   ```bash
+   supabase functions deploy notifications
+   ```
+
+The backend migration includes:
+- Core schema (`profiles`, `institutions`, `opportunities`, `applications`, `conversations`, `messages`, `notifications`, etc.)
+- Row Level Security policies
+- Auth/profile trigger for new users
+- Search RPC (`search_opportunities`)
+- Notification triggers
+- Storage buckets and policies (`avatars`, `documents`, `publications`, `institution-logos`)
+
 ### Available Scripts
 
 ```bash
@@ -91,8 +124,23 @@ src/
 ├── hooks/               # Custom React hooks
 ├── assets/              # Static assets (logos, images)
 ├── lib/                 # Utility functions
-└── integrations/        # Third-party integrations
+├── integrations/        # Third-party integrations
+└── services/            # Supabase API services (opportunities, profile, messages)
 ```
+
+### Backend Service Layer
+
+Typed service files are available in `src/services`:
+- `opportunityService.ts`
+- `profileService.ts`
+- `messageService.ts`
+
+Auth/session management is implemented in:
+- `src/hooks/useAuth.ts`
+
+Supabase client and database types:
+- `src/integrations/supabase/client.ts`
+- `src/integrations/supabase/types.ts`
 
 ## 🌐 Deployment
 

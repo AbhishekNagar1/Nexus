@@ -146,8 +146,8 @@ const ResetPassword = () => {
 
               <div className="text-center text-sm text-foreground/70">
                 Remember your password?{" "}
-                <a href="/signin" className="text-primary hover:underline font-medium">
-                  Sign in
+                <a href="/" className="text-primary hover:underline font-medium">
+                  Go home
                 </a>
               </div>
             </CardContent>

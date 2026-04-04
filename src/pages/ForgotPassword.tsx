@@ -100,11 +100,11 @@ const ForgotPassword = () => {
 
               <div className="text-center">
                 <a 
-                  href="/signin" 
+                  href="/" 
                   className="inline-flex items-center text-sm text-foreground/70 hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4 mr-1" />
-                  Back to sign in
+                  Back to home
                 </a>
               </div>
             </CardContent>
