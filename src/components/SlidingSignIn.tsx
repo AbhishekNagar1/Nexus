@@ -21,7 +21,7 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
   const [isRecoveryDialogOpen, setIsRecoveryDialogOpen] = useState(false);
   const [isRecoverySent, setIsRecoverySent] = useState(false);
   const [recoveryEmail, setRecoveryEmail] = useState("");
-  const { login } = useAuth();
+  const { signIn, signUp, signInWithOAuth, resetPasswordForEmail } = useAuth();
   const { toast } = useToast();
   
   const [signInData, setSignInData] = useState({
@@ -38,7 +38,7 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
     confirmPassword: ""
   });
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate required fields
@@ -52,18 +52,25 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
       return;
     }
     
-    toast({
-      title: "Coming Soon! 🔑",
-      description: "User authentication system is currently in development. Sign-in functionality will be available soon!",
-      duration: 4000,
-    });
-    
-    console.log("Sign in:", signInData);
-    login();
-    onClose();
+    try {
+      await signIn(signInData.email, signInData.password);
+      toast({
+        title: "Signed in",
+        description: "Welcome back to Nexus.",
+        duration: 3000,
+      });
+      onClose();
+    } catch (error) {
+      toast({
+        title: "Sign in failed",
+        description: (error as Error).message || "Please check your credentials.",
+        variant: "destructive",
+        duration: 4000,
+      });
+    }
   };
 
-  const handlePasswordRecovery = (e: React.FormEvent) => {
+  const handlePasswordRecovery = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!recoveryEmail) {
@@ -76,23 +83,25 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
       return;
     }
     
-    toast({
-      title: "Coming Soon! 📬",
-      description: "Password recovery system is currently in development. This feature will be available soon!",
-      duration: 4000,
-    });
-    
-    console.log("Password recovery for:", recoveryEmail);
-    // Here you would integrate with Supabase auth recovery
-    setIsRecoverySent(true);
-    setTimeout(() => {
-      setIsRecoveryDialogOpen(false);
-      setIsRecoverySent(false);
-      setRecoveryEmail("");
-    }, 3000);
+    try {
+      await resetPasswordForEmail(recoveryEmail);
+      setIsRecoverySent(true);
+      setTimeout(() => {
+        setIsRecoveryDialogOpen(false);
+        setIsRecoverySent(false);
+        setRecoveryEmail("");
+      }, 3000);
+    } catch (error) {
+      toast({
+        title: "Recovery failed",
+        description: (error as Error).message || "Unable to send recovery email.",
+        variant: "destructive",
+        duration: 4000,
+      });
+    }
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate required fields
@@ -106,23 +115,61 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
       return;
     }
     
-    toast({
-      title: "Coming Soon! 🎆",
-      description: "User registration system is currently in development. Account creation will be available soon!",
-      duration: 4000,
-    });
-    
-    console.log("Sign up:", signUpData);
-    login();
-    onClose();
+    if (signUpData.password !== signUpData.confirmPassword) {
+      toast({
+        title: "Passwords Don't Match",
+        description: "Please ensure both passwords match.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+
+    if (signUpData.password.length < 8) {
+      toast({
+        title: "Weak Password",
+        description: "Password must be at least 8 characters long.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+
+    try {
+      await signUp({
+        email: signUpData.email,
+        password: signUpData.password,
+        firstName: signUpData.firstName,
+        lastName: signUpData.lastName,
+        role: signUpData.role as "student" | "professor" | "institution",
+      });
+      toast({
+        title: "Account created",
+        description: "Please check your email to confirm your account.",
+        duration: 4000,
+      });
+      onClose();
+    } catch (error) {
+      toast({
+        title: "Sign up failed",
+        description: (error as Error).message || "Unable to create account.",
+        variant: "destructive",
+        duration: 4000,
+      });
+    }
   };
   
-  const handleSocialAuth = (platform: string) => {
-    toast({
-      title: "Coming Soon! 🔗",
-      description: `${platform} authentication is currently in development. Social login features coming soon!`,
-      duration: 3000,
-    });
+  const handleSocialAuth = async (platform: "google" | "github") => {
+    try {
+      await signInWithOAuth(platform);
+    } catch (error) {
+      toast({
+        title: "Social auth failed",
+        description: (error as Error).message || "Unable to continue with social login.",
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
   };
 
   return (
@@ -167,11 +214,11 @@ const SlidingSignIn = ({ isOpen, onClose }: SlidingSignInProps) => {
             <CardContent className="p-4 md:p-6 space-y-4 md:space-y-6">
               {/* Social Sign In */}
               <div className="space-y-3">
-                <Button variant="outline" className="w-full glass-button" onClick={() => handleSocialAuth('Google')}>
+                <Button variant="outline" className="w-full glass-button" onClick={() => handleSocialAuth("google")}>
                   <Chrome className="mr-2 h-4 w-4" />
                   Continue with Google
                 </Button>
-                <Button variant="outline" className="w-full glass-button" onClick={() => handleSocialAuth('GitHub')}>
+                <Button variant="outline" className="w-full glass-button" onClick={() => handleSocialAuth("github")}>
                   <Github className="mr-2 h-4 w-4" />
                   Continue with GitHub
                 </Button>

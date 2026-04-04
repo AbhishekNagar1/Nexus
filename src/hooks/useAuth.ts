@@ -1,11 +1,24 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-import { User } from '@supabase/supabase-js';
+import { Session, User } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 
 interface AuthContextType {
   user: User | null;
+  session: Session | null;
   isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
+  loading: boolean;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (params: {
+    email: string;
+    password: string;
+    firstName?: string;
+    lastName?: string;
+    role?: 'student' | 'professor' | 'institution';
+  }) => Promise<void>;
+  signInWithOAuth: (provider: 'google' | 'github') => Promise<void>;
+  resetPasswordForEmail: (email: string) => Promise<void>;
+  updatePassword: (newPassword: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -20,41 +33,96 @@ export const useAuth = () => {
 
 // Hook for managing auth state
 export const useAuthState = () => {
+  const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const login = () => {
-    // Mock user for demo
-    const mockUser = {
-      id: '1',
-      email: 'john@university.edu',
-      user_metadata: {
-        first_name: 'John',
-        last_name: 'Doe',
-        role: 'professor'
-      },
-      app_metadata: {},
-      aud: 'authenticated',
-      created_at: new Date().toISOString()
-    } as User;
-    
-    setUser(mockUser);
-    setIsAuthenticated(true);
-    localStorage.setItem('isAuthenticated', 'true');
+  const signIn = async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
   };
 
-  const logout = () => {
-    setUser(null);
-    setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated');
+  const signUp = async (params: {
+    email: string;
+    password: string;
+    firstName?: string;
+    lastName?: string;
+    role?: 'student' | 'professor' | 'institution';
+  }) => {
+    const { error } = await supabase.auth.signUp({
+      email: params.email,
+      password: params.password,
+      options: {
+        data: {
+          first_name: params.firstName,
+          last_name: params.lastName,
+          role: params.role,
+        },
+      },
+    });
+    if (error) throw error;
+  };
+
+  const signInWithOAuth = async (provider: 'google' | 'github') => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/`,
+      },
+    });
+    if (error) throw error;
+  };
+
+  const resetPasswordForEmail = async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (error) throw error;
+  };
+
+  const updatePassword = async (newPassword: string) => {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) throw error;
+  };
+
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
   };
 
   useEffect(() => {
-    const savedAuth = localStorage.getItem('isAuthenticated');
-    if (savedAuth === 'true') {
-      login();
-    }
+    let mounted = true;
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!mounted) return;
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
-  return { user, isAuthenticated, login, logout };
+  return {
+    user,
+    session,
+    isAuthenticated: Boolean(user),
+    loading,
+    signIn,
+    signUp,
+    signInWithOAuth,
+    resetPasswordForEmail,
+    updatePassword,
+    logout,
+  };
 };
