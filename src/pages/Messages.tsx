@@ -78,7 +78,7 @@ const Messages = () => {
     return () => {
       mounted = false;
     };
-  }, [isAuthenticated, selectedConversation, toast]);
+  }, [isAuthenticated, toast]);
 
   useEffect(() => {
     if (!selectedConversation) {
@@ -266,7 +266,7 @@ const Messages = () => {
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyDown={(e) => {
-                          if (e.key === "Enter") {
+                          if (e.key === "Enter" && !e.shiftKey) {
                             e.preventDefault();
                             void handleSendMessage();
                           }

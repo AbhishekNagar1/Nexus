@@ -9,12 +9,18 @@ interface NotificationPayload {
   data?: Record<string, unknown>;
 }
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+const allowedOrigins = (Deno.env.get("ALLOWED_ORIGINS") ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+
+const getCorsHeaders = (origin: string | null) => ({
+  "Access-Control-Allow-Origin":
+    origin && (allowedOrigins.length === 0 || allowedOrigins.includes(origin)) ? origin : "null",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+});
 
 serve(async (req: Request) => {
+  const requestOrigin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(requestOrigin);
+
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }

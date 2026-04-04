@@ -1,5 +1,8 @@
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import type { Tables } from "@/integrations/supabase/types";
+
+type MessageRow = Tables<"messages">;
 
 export const messageService = {
   async listConversations() {
@@ -31,13 +34,13 @@ export const messageService = {
     return data ?? [];
   },
 
-  subscribeToConversation(conversationId: string, callback: (message: unknown) => void): RealtimeChannel {
+  subscribeToConversation(conversationId: string, callback: (message: MessageRow) => void): RealtimeChannel {
     return supabase
       .channel(`conversation:${conversationId}`)
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "messages", filter: `conversation_id=eq.${conversationId}` },
-        (payload) => callback(payload.new),
+        (payload) => callback(payload.new as MessageRow),
       )
       .subscribe();
   },

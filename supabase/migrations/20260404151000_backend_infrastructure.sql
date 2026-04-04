@@ -1,5 +1,9 @@
 -- Nexus backend infrastructure
 -- Creates schema, RLS, policies, triggers, helper functions, and storage rules.
+-- Rollback guidance:
+--   - Drop dependent triggers first, then policies, functions, and tables in reverse dependency order.
+--   - Remove storage policies/buckets if needed.
+--   - For production, prefer a dedicated follow-up down migration instead of manual rollback.
 
 create extension if not exists "pgcrypto";
 

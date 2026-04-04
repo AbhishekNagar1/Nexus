@@ -65,8 +65,7 @@ export const profileService = {
     const { error: uploadError } = await supabase.storage.from("documents").upload(path, file, { upsert: false });
     if (uploadError) throw uploadError;
 
-    const { data } = supabase.storage.from("documents").getPublicUrl(path);
-    return data.publicUrl;
+    return path;
   },
 
   async uploadOwnDocument(file: File) {

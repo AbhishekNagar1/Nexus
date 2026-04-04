@@ -24,7 +24,7 @@ export type OpportunityInsert = {
 
 export type ApplicationInsert = {
   cover_letter?: string;
-  cv_url?: string;
+  cv_url?: string; // stored path in private "documents" bucket
   additional_documents?: Record<string, unknown>;
 };
 
