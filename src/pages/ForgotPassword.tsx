@@ -6,13 +6,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Layout from "@/components/Layout";
 import { ArrowLeft, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+  const { resetPasswordForEmail } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email.trim()) {
@@ -25,14 +27,17 @@ const ForgotPassword = () => {
       return;
     }
     
-    toast({
-      title: "Coming Soon! 📧",
-      description: "Password reset functionality is currently in development. This feature will be available soon!",
-      duration: 4000,
-    });
-    
-    console.log("Reset password for:", email);
-    setIsSubmitted(true);
+    try {
+      await resetPasswordForEmail(email);
+      setIsSubmitted(true);
+    } catch (error) {
+      toast({
+        title: "Unable to send reset link",
+        description: (error as Error).message || "Please try again.",
+        variant: "destructive",
+        duration: 4000,
+      });
+    }
   };
 
   return (
@@ -95,11 +100,11 @@ const ForgotPassword = () => {
 
               <div className="text-center">
                 <a 
-                  href="/signin" 
+                  href="/" 
                   className="inline-flex items-center text-sm text-foreground/70 hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4 mr-1" />
-                  Back to sign in
+                  Back to home
                 </a>
               </div>
             </CardContent>
